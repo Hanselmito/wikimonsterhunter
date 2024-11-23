@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-@XmlRootElement(name="Connection")
+@XmlRootElement(name="connection")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ConnectionProperties implements Serializable {
     private static final long serialVersionUID=1L;

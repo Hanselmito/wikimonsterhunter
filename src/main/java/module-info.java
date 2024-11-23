@@ -8,4 +8,5 @@ module com.github.Hanselmito {
     exports com.github.Hanselmito;
     exports com.github.Hanselmito.View;
     opens com.github.Hanselmito.View to javafx.fxml;
+    opens com.github.Hanselmito.Conection to java.xml.bind;
 }
