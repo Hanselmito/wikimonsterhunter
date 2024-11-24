@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Monstruos {
-    protected int id;
+    protected int id = 20;
     protected String nombre;
     protected String titulos;
     protected Clase clase;
