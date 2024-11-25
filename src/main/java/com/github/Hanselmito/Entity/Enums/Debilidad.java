@@ -11,7 +11,7 @@ public enum Debilidad {
     Debilidad(String partOfDebilidad) {
         PartOfDebilidad = partOfDebilidad;
     }
-    private String getPartOfDebilidad() {
+    public String getPartOfDebilidad() {
         return PartOfDebilidad;
     }
 }

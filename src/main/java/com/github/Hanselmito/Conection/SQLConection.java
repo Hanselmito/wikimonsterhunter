@@ -2,7 +2,6 @@ package com.github.Hanselmito.Conection;
 
 import com.github.Hanselmito.Utils.XMLmanager;
 
-import javax.xml.bind.JAXBException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,7 +11,7 @@ public class SQLConection {
     private static SQLConection _instance;
     private static Connection conn;
 
-private SQLConection() throws JAXBException {
+private SQLConection(){
         ConnectionProperties properties = (ConnectionProperties) XMLmanager.readXML(new ConnectionProperties(), FILE);
 
         try {
@@ -23,7 +22,7 @@ private SQLConection() throws JAXBException {
         }
     }
 
-    public static Connection getConnection() throws JAXBException {
+    public static Connection getConnection(){
         if (_instance == null) {
             _instance = new SQLConection();
         }

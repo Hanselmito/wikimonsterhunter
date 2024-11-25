@@ -1,19 +1,18 @@
 package com.github.Hanselmito.Entity.Enums;
 
 public enum DebilElemento {
-    Fuego(Debilidad.Fuego),
-    Agua(Debilidad.Agua),
-    Rayo(Debilidad.Rayo),
-    Hielo(Debilidad.Hielo),
-    Draco(Debilidad.Draco);
+    elementoFuego("elementoFuego"),
+    elementoAgua("elementoAgua"),
+    elementoRayo("elementoRayo"),
+    elementoHielo("elementoHielo"),
+    elementoDraco("elementoDraco");
 
-    private final Debilidad debilidad;
-
-    DebilElemento(Debilidad debilidad) {
-        this.debilidad = debilidad;
+    private String PartOfDebilElemento;
+    DebilElemento(String partOfDebilElemento) {
+        PartOfDebilElemento = partOfDebilElemento;
+    }
+    public String getPartOfDebilElemento() {
+        return PartOfDebilElemento;
     }
 
-    public Debilidad getDebilidad() {
-        return debilidad;
-    }
 }

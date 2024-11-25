@@ -7,18 +7,32 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 public class XMLmanager {
-    public static <T> boolean writeXML(T c, String filename) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(c.getClass());
-        Marshaller m = context.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        m.marshal(c, new File(filename));
-        return true;
+    public static <T> boolean writeXML(T c, String filename){
+        boolean result=false;
+        JAXBContext context;
+        try {
+            context = JAXBContext.newInstance(c.getClass());
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+            m.setProperty(Marshaller.JAXB_ENCODING,"UTF-8");
+            m.marshal(c,new File(filename));
+            result=true;
+        }catch (JAXBException e){
+            e.printStackTrace();
+        }
+        return result;
     }
+    public static<T> T readXML(T c,String filename){
+        T result = c;
+        JAXBContext context;
 
-    public static <T> T readXML(T c, String filename) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(c.getClass());
-        Unmarshaller um = context.createUnmarshaller();
-        return (T) um.unmarshal(new File(filename));
+        try{
+            context = JAXBContext.newInstance(c.getClass());
+            Unmarshaller um = context.createUnmarshaller();
+            result = (T) um.unmarshal(new File(filename));
+        }catch (JAXBException e){
+            e.printStackTrace();
+        }
+        return result;
     }
 }
