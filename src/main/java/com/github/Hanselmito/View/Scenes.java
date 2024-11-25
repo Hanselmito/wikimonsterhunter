@@ -2,7 +2,8 @@ package com.github.Hanselmito.View;
 
 public enum Scenes {
     ROOT("View/layout.fxml"),
-    MonstruosController("View/MonstruosController.fxml");
+    MonstruosController("View/MonstruosSaveController.fxml"),
+    Menu("View/Menu.fxml");
 
     private String url;
     Scenes(String url){

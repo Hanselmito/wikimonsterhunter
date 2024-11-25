@@ -22,7 +22,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MonstruosController extends Controller implements Initializable {
+public class MonstruosSaveController extends Controller implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML
