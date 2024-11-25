@@ -1,6 +1,7 @@
 package com.github.Hanselmito.Entity;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Fisiologia {
     protected byte[] imagen;
@@ -10,6 +11,7 @@ public class Fisiologia {
     protected int disparo;
     protected String partes_rompibles;
     protected Monstruos id_monstruo;
+    protected List<Monstruos> List_Monstruos;
 
     public Fisiologia() {
     }
@@ -22,6 +24,7 @@ public class Fisiologia {
         this.disparo = disparo;
         this.partes_rompibles = partes_rompibles;
         this.id_monstruo = id_monstruo;
+        this.List_Monstruos = null;
     }
 
     public byte[] getImagen() {
@@ -80,6 +83,14 @@ public class Fisiologia {
         this.id_monstruo = id_monstruo;
     }
 
+    public List<Monstruos> getList_Monstruos() {
+        return List_Monstruos;
+    }
+
+    public void setList_Monstruos(List<Monstruos> list_Monstruos) {
+        List_Monstruos = list_Monstruos;
+    }
+
     @Override
     public String toString() {
         return "Fisiologia{" +
@@ -90,6 +101,7 @@ public class Fisiologia {
                 ", disparo=" + disparo +
                 ", partes_rompibles='" + partes_rompibles + '\'' +
                 ", id_monstruo=" + id_monstruo +
+                ", List_Monstruos=" + List_Monstruos +
                 '}';
     }
 }

@@ -2,6 +2,8 @@ package com.github.Hanselmito.Entity;
 
 import com.github.Hanselmito.Entity.Enums.AlteraEstado;
 
+import java.util.List;
+
 
 public class Estado {
     protected AlteraEstado estadoVeneno = AlteraEstado.estadoVeneno;
@@ -15,6 +17,7 @@ public class Estado {
     protected int efectividadNitro;
     protected int efectividadAturdimiento;
     protected Monstruos id_monstruo;
+    protected List<Monstruos> List_Monstruos;
 
     public Estado() {
     }
@@ -31,6 +34,7 @@ public class Estado {
         this.efectividadNitro = efectividadNitro;
         this.efectividadAturdimiento = efectividadAturdimiento;
         this.id_monstruo = id_monstruo;
+        this.List_Monstruos = null;
     }
 
     public AlteraEstado getEstadoVeneno() {
@@ -121,6 +125,14 @@ public class Estado {
         this.id_monstruo = id_monstruo;
     }
 
+    public List<Monstruos> getList_Monstruos() {
+        return List_Monstruos;
+    }
+
+    public void setList_Monstruos(List<Monstruos> list_Monstruos) {
+        List_Monstruos = list_Monstruos;
+    }
+
     @Override
     public String toString() {
         return "Estado{" +
@@ -135,6 +147,7 @@ public class Estado {
                 ", efectividadNitro=" + efectividadNitro +
                 ", efectividadAturdimiento=" + efectividadAturdimiento +
                 ", id_monstruo=" + id_monstruo +
+                ", List_Monstruos=" + List_Monstruos +
                 '}';
     }
 }

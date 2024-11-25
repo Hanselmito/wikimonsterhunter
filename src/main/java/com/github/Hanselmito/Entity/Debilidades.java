@@ -2,6 +2,8 @@ package com.github.Hanselmito.Entity;
 
 import com.github.Hanselmito.Entity.Enums.DebilElemento;
 
+import java.util.List;
+
 public class Debilidades {
     protected DebilElemento elementoFuego = DebilElemento.Fuego;
     protected DebilElemento elementoAgua = DebilElemento.Agua;
@@ -14,6 +16,7 @@ public class Debilidades {
     protected int efectividadHielo;
     protected int efectividadDraco;
     protected Monstruos id_monstruo;
+    protected List<Monstruos> List_Monstruos;
 
     public Debilidades() {
     }
@@ -30,6 +33,7 @@ public class Debilidades {
         this.efectividadHielo = efectividadHielo;
         this.efectividadDraco = efectividadDraco;
         this.id_monstruo = id_monstruo;
+        this.List_Monstruos = null;
     }
 
     public DebilElemento getElementoFuego() {
@@ -120,6 +124,14 @@ public class Debilidades {
         this.id_monstruo = id_monstruo;
     }
 
+    public List<Monstruos> getList_Monstruos() {
+        return List_Monstruos;
+    }
+
+    public void setList_Monstruos(List<Monstruos> list_Monstruos) {
+        List_Monstruos = list_Monstruos;
+    }
+
     @Override
     public String toString() {
         return "Debilidades{" +
@@ -134,6 +146,7 @@ public class Debilidades {
                 ", efectividadHielo=" + efectividadHielo +
                 ", efectividadDraco=" + efectividadDraco +
                 ", id_monstruo=" + id_monstruo +
+                ", List_Monstruos=" + List_Monstruos +
                 '}';
     }
 }
