@@ -6,6 +6,7 @@ import com.github.Hanselmito.Entity.Enums.Elementos;
 import com.github.Hanselmito.Entity.Enums.Estados;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Monstruos {
@@ -20,6 +21,7 @@ public class Monstruos {
     protected String tamano;
     protected String parientes;
     protected byte[] imagen;
+    protected List<Materiales> List_Materiales;
 
     public Monstruos() {
     }
@@ -36,6 +38,7 @@ public class Monstruos {
         this.tamano = tamano;
         this.parientes = parientes;
         this.imagen = imagen;
+        List_Materiales = null;
     }
 
     public int getId() {
@@ -126,6 +129,14 @@ public class Monstruos {
         this.imagen = imagen;
     }
 
+    public List<Materiales> getList_Materiales() {
+        return List_Materiales;
+    }
+
+    public void setList_Materiales(List<Materiales> list_Materiales) {
+        List_Materiales = list_Materiales;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -153,6 +164,7 @@ public class Monstruos {
                 ", tamano='" + tamano + '\'' +
                 ", parientes='" + parientes + '\'' +
                 ", imagen=" + Arrays.toString(imagen) +
+                ", List_Materiales=" + List_Materiales +
                 '}';
     }
 }

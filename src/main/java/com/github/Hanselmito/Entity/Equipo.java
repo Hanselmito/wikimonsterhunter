@@ -3,6 +3,7 @@ package com.github.Hanselmito.Entity;
 import com.github.Hanselmito.Entity.Enums.Tipo;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Equipo {
@@ -13,6 +14,7 @@ public class Equipo {
     protected byte[] imagen;
     protected String materiales;
     protected Materiales id_materiales;
+    protected List<Abilidades> List_Abilidades;
 
     public Equipo() {
     }
@@ -25,6 +27,7 @@ public class Equipo {
         this.imagen = imagen;
         this.materiales = materiales;
         this.id_materiales = id_materiales;
+        this.List_Abilidades = null;
     }
 
     public int getId() {
@@ -83,6 +86,14 @@ public class Equipo {
         this.id_materiales = id_materiales;
     }
 
+    public List<Abilidades> getList_Abilidades() {
+        return List_Abilidades;
+    }
+
+    public void setList_Abilidades(List<Abilidades> list_Abilidades) {
+        List_Abilidades = list_Abilidades;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,6 +117,7 @@ public class Equipo {
                 ", imagen=" + Arrays.toString(imagen) +
                 ", materiales='" + materiales + '\'' +
                 ", id_materiales=" + id_materiales +
+                ", List_Abilidades=" + List_Abilidades +
                 '}';
     }
 }
