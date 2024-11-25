@@ -1,4 +1,4 @@
-package com.github.Hanselmito.view;
+package com.github.Hanselmito.View;
 
 import com.github.Hanselmito.DAO.MonstruosDAO;
 import com.github.Hanselmito.Entity.Enums.Clase;
@@ -36,13 +36,13 @@ public class MonstruosController extends Controller implements Initializable {
     @FXML
     private TextField parientes;
     @FXML
-    private ChoiceBox clase;
+    private ChoiceBox<Clase> clase;
     @FXML
-    private ChoiceBox elementos;
+    private ChoiceBox<Elementos> elementos;
     @FXML
-    private ChoiceBox estados;
+    private ChoiceBox<Estados> estados;
     @FXML
-    private ChoiceBox debilidad;
+    private ChoiceBox<Debilidad> debilidad;
     @FXML
     private Button file;
     @FXML
@@ -66,7 +66,10 @@ public class MonstruosController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        clase.getItems().addAll(Clase.values());
+        elementos.getItems().addAll(Elementos.values());
+        estados.getItems().addAll(Estados.values());
+        debilidad.getItems().addAll(Debilidad.values());
     }
 
     @FXML
@@ -80,12 +83,20 @@ public class MonstruosController extends Controller implements Initializable {
         imageFile = fileChooser.showOpenDialog(stage);
         if (imageFile != null) {
             try {
+                System.out.println("Archivo de imagen seleccionado: " + imageFile.getAbsolutePath());
                 InputStream is = new FileInputStream(imageFile);
                 Image image = new Image(is);
-                imageView.setImage(image); // Mostrar la imagen en el ImageView
+                if (image.isError()) {
+                    System.err.println("Error al cargar la imagen: " + image.getException().getMessage());
+                } else {
+                    imageView.setImage(image); // Mostrar la imagen en el ImageView
+                    System.out.println("Imagen cargada correctamente en el ImageView.");
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("No se seleccionó ningún archivo de imagen.");
         }
     }
 
@@ -97,20 +108,16 @@ public class MonstruosController extends Controller implements Initializable {
         String habitatsText = habitats.getText();
         String tamanoText = tamano.getText();
         String parientesText = parientes.getText();
-        Clase claseValue = (Clase) clase.getValue();
-        Elementos elementosValue = (Elementos) elementos.getValue();
-        Estados estadosValue = (Estados) estados.getValue();
-        Debilidad debilidadValue = (Debilidad) debilidad.getValue();
+        Clase claseValue = clase.getValue();
+        Elementos elementosValue = elementos.getValue();
+        Estados estadosValue = estados.getValue();
+        Debilidad debilidadValue = debilidad.getValue();
 
         // Convert image to byte array
-        byte[] imageBytes = null;
-        if (imageFile != null) {
-            try (InputStream is = new FileInputStream(imageFile)) {
-                imageBytes = is.readAllBytes();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        byte[] imageData = new byte[(int) imageFile.length()];
+        FileInputStream fis = new FileInputStream(imageFile);
+        fis.read(imageData);
+        fis.close();
 
         // Create a new Monstruos object
         Monstruos mo = new Monstruos();
@@ -123,7 +130,7 @@ public class MonstruosController extends Controller implements Initializable {
         mo.setHabitats(habitatsText);
         mo.setTamano(tamanoText);
         mo.setParientes(parientesText);
-        mo.setImagen(imageBytes);
+        mo.setImagen(imageData);
 
         try {
             moDAO.save(mo);

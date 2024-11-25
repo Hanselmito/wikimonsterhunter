@@ -1,4 +1,4 @@
-package com.github.Hanselmito.view;
+package com.github.Hanselmito.View;
 
 import javafx.scene.Parent;
 

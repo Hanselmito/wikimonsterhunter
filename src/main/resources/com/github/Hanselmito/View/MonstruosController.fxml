@@ -7,28 +7,28 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.view.MonstruosController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.MonstruosController">
    <children>
       <TextField fx:id="nombre" layoutX="82.0" layoutY="38.0" promptText="nombre" />
       <TextField fx:id="titulos" layoutX="82.0" layoutY="105.0" promptText="titulos" />
-      <ChoiceBox fx:id="clase" layoutX="300.0" layoutY="29.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="elementos" layoutX="300.0" layoutY="81.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="estados" layoutX="300.0" layoutY="136.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="debilidad" layoutX="300.0" layoutY="187.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="clase" layoutX="250.0" layoutY="33.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="elementos" layoutX="414.0" layoutY="33.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="estados" layoutX="250.0" layoutY="94.0" prefWidth="150.0" />
       <TextField fx:id="habitats" layoutX="82.0" layoutY="224.0" promptText="habitats" />
       <TextField fx:id="tamano" layoutX="82.0" layoutY="287.0" promptText="tamaño" />
       <TextField fx:id="parientes" layoutX="82.0" layoutY="345.0" promptText="Parientes" />
-      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="350.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView" fitHeight="191.0" fitWidth="217.0" layoutX="333.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="file" layoutX="274.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#loadImage" text="File" />
       <Label layoutX="82.0" layoutY="20.0" text="nombre" />
       <Label layoutX="82.0" layoutY="82.0" text="titulos" />
       <Label layoutX="85.0" layoutY="200.0" text="habitats" />
       <Label layoutX="85.0" layoutY="257.0" text="tamaño" />
       <Label layoutX="85.0" layoutY="321.0" text="Parientes" />
-      <Label layoutX="300.0" layoutY="11.0" text="clase" />
-      <Label layoutX="300.0" layoutY="63.0" text="elementos" />
-      <Label layoutX="300.0" layoutY="121.0" text="estados" />
-      <Label layoutX="300.0" layoutY="169.0" text="debilidad" />
+      <Label layoutX="250.0" layoutY="15.0" text="clase" />
+      <Label layoutX="414.0" layoutY="15.0" text="elementos" />
+      <Label layoutX="250.0" layoutY="79.0" text="estados" />
+      <Label layoutX="414.0" layoutY="67.0" text="debilidad" />
       <Button fx:id="insert" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#handleInsertButtonAction" text="Insertar" />
+      <ChoiceBox fx:id="debilidad" layoutX="414.0" layoutY="94.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
