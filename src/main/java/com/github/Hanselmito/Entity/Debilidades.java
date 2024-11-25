@@ -5,11 +5,11 @@ import com.github.Hanselmito.Entity.Enums.DebilElemento;
 import java.util.List;
 
 public class Debilidades {
-    protected DebilElemento elementoFuego = DebilElemento.Fuego;
-    protected DebilElemento elementoAgua = DebilElemento.Agua;
-    protected DebilElemento elementoRayo = DebilElemento.Rayo;
-    protected DebilElemento elementoHielo = DebilElemento.Hielo;
-    protected DebilElemento elementoDraco = DebilElemento.Draco;
+    protected DebilElemento elementoFuego;
+    protected DebilElemento elementoAgua;
+    protected DebilElemento elementoRayo;
+    protected DebilElemento elementoHielo;
+    protected DebilElemento elementoDraco;
     protected int efectividadFuego;
     protected int efectividadAgua;
     protected int efectividadRayo;

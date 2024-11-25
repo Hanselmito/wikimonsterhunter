@@ -7,11 +7,7 @@ import javax.xml.bind.JAXBException;
 
 public class SaveConection {
     public static void main(String[] args) {
-        try {
-            ConnectionProperties c = new ConnectionProperties("localhost", "3306", "wikimonsterhunter", "root", "");
-            XMLmanager.writeXML(c, "Connection.xml");
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
+        ConnectionProperties c = new ConnectionProperties("localhost", "3306", "wikimonsterhunter", "root", "");
+        XMLmanager.writeXML(c, "Connection.xml");
     }
 }
