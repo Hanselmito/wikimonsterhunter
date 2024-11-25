@@ -28,17 +28,16 @@ public class MonstruosDAO implements DAO<Monstruos>{
         Monstruos m = findById(entity.getId());
         if(m!=null){
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT)){
-                pst.setInt(1, entity.getId());
-                pst.setString(2, entity.getNombre());
-                pst.setString(3, entity.getTitulos());
-                pst.setString(4, entity.getClase().getPartOfClase());
-                pst.setString(5, entity.getElementos().getPartOfElementos());
-                pst.setString(6, entity.getEstados().getPartOfEstados());
-                pst.setString(7, entity.getDebilidad().getPartOfDebilidad());
-                pst.setString(8, entity.getHabitats());
-                pst.setString(9, entity.getTamano());
-                pst.setString(10, entity.getParientes());
-                pst.setBytes(11, entity.getImagen());
+                pst.setString(1, entity.getNombre());
+                pst.setString(2, entity.getTitulos());
+                pst.setString(3, entity.getClase().getPartOfClase());
+                pst.setString(4, entity.getElementos().getPartOfElementos());
+                pst.setString(5, entity.getEstados().getPartOfEstados());
+                pst.setString(6, entity.getDebilidad().getPartOfDebilidad());
+                pst.setString(7, entity.getHabitats());
+                pst.setString(8, entity.getTamano());
+                pst.setString(9, entity.getParientes());
+                pst.setBytes(10, entity.getImagen());
                 pst.executeUpdate();
             }catch (Exception e){
                 e.printStackTrace();

@@ -1,8 +1,6 @@
 package com.github.Hanselmito;
 
-import com.github.Hanselmito.view.AppController;
-import com.github.Hanselmito.view.Scenes;
-import com.github.Hanselmito.view.View;
+import com.github.Hanselmito.View.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
