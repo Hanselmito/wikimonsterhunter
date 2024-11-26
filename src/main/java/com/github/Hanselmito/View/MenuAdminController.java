@@ -40,7 +40,7 @@ public class MenuAdminController extends Controller implements Initializable {
                 e.printStackTrace();
             }
         });
-        MSC.setText(MonstruosSaveController.class.getSimpleName());
+        MSC.setText(MonstruosController.class.getSimpleName());
         //image2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen2));
         //image3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen3));
         //image4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen4));
