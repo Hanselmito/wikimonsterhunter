@@ -168,4 +168,8 @@ public class MonstruosDAO implements DAO<Monstruos>{
     public void close() {
 
     }
+
+    public static MonstruosDAO build(){
+        return new MonstruosDAO();
+    }
 }

@@ -3,6 +3,7 @@ package com.github.Hanselmito.View;
 import com.github.Hanselmito.App;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -11,6 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MenuAdminController extends Controller implements Initializable {
+    @FXML
+    private Button Back;
     @FXML
     private ImageView image1;
     @FXML
@@ -29,6 +32,8 @@ public class MenuAdminController extends Controller implements Initializable {
     private ImageView image8;
     @FXML
     private Label MSC;
+    @FXML
+    private Label FSC;
 
 
     @Override
@@ -41,7 +46,14 @@ public class MenuAdminController extends Controller implements Initializable {
             }
         });
         MSC.setText(MonstruosController.class.getSimpleName());
-        //image2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen2));
+        image2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                App.currentController.changeScene(Scenes.FisiologiaController, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        FSC.setText(FisiologiaController.class.getSimpleName());
         //image3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen3));
         //image4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen4));
         //image5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen5));
@@ -59,5 +71,10 @@ public class MenuAdminController extends Controller implements Initializable {
     @Override
     public void onClose(Object output) {
         // Implement any logic needed when the screen is closed
+    }
+
+    @FXML
+    private void goBack() throws Exception {
+        App.currentController.changeScene(Scenes.Menu,null);
     }
 }
