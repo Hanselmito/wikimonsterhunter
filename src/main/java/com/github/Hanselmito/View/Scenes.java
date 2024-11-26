@@ -4,6 +4,7 @@ public enum Scenes {
     ROOT("View/layout.fxml"),
     MonstruosController("View/MonstruosController.fxml"),
     FisiologiaController("View/FisiologiaController.fxml"),
+    DebilidadesController("View/DebilidadesController.fxml"),
     MenuAdmin("View/MenuAdmin.fxml"),
     Menu("View/Menu.fxml");
 

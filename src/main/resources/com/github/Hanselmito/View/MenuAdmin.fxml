@@ -16,7 +16,10 @@
          <image>
             <Image url="@../../../../Icons/MHW-Fisiolog3Fa_Rath.jpg" />
          </image></ImageView>
-        <ImageView fx:id="image3" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="50.0" />
+        <ImageView fx:id="image3" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="50.0">
+         <image>
+            <Image url="@../../../../Icons/Estado-MHW_Plaga_de_Draco.jpg" />
+         </image></ImageView>
         <ImageView fx:id="image4" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="200.0" />
         <ImageView fx:id="image5" fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="200.0" />
         <ImageView fx:id="image6" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="200.0" />
@@ -25,5 +28,6 @@
       <Label fx:id="MSC" layoutX="50.0" layoutY="150.0" prefHeight="17.0" prefWidth="100.0" text="1" />
       <Label fx:id="FSC" layoutX="200.0" layoutY="150.0" prefHeight="17.0" prefWidth="100.0" text="2" />
       <Button fx:id="Back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back Menu" />
+      <Label fx:id="DSC" layoutX="350.0" layoutY="150.0" prefHeight="17.0" prefWidth="100.0" text="3" />
     </children>
 </AnchorPane>
