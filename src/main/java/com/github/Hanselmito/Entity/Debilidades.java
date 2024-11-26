@@ -1,15 +1,15 @@
 package com.github.Hanselmito.Entity;
 
-import com.github.Hanselmito.Entity.Enums.DebilElemento;
+import com.github.Hanselmito.Entity.Enums.*;
 
 import java.util.List;
 
 public class Debilidades {
-    protected DebilElemento elementoFuego;
-    protected DebilElemento elementoAgua;
-    protected DebilElemento elementoRayo;
-    protected DebilElemento elementoHielo;
-    protected DebilElemento elementoDraco;
+    protected DebilElementoFuego elementoFuego;
+    protected DebilElementoAgua elementoAgua;
+    protected DebilElementoRayo elementoRayo;
+    protected DebilElementoHielo elementoHielo;
+    protected DebilElementoDraco elementoDraco;
     protected int efectividadFuego;
     protected int efectividadAgua;
     protected int efectividadRayo;
@@ -21,7 +21,7 @@ public class Debilidades {
     public Debilidades() {
     }
 
-    public Debilidades(DebilElemento elementoFuego, DebilElemento elementoAgua, DebilElemento elementoRayo, DebilElemento elementoHielo, DebilElemento elementoDraco, int efectividadFuego, int efectividadAgua, int efectividadRayo, int efectividadHielo, int efectividadDraco, Monstruos id_monstruo) {
+    public Debilidades(DebilElementoFuego elementoFuego, DebilElementoAgua elementoAgua, DebilElementoRayo elementoRayo, DebilElementoHielo elementoHielo, DebilElementoDraco elementoDraco, int efectividadFuego, int efectividadAgua, int efectividadRayo, int efectividadHielo, int efectividadDraco, Monstruos id_monstruo) {
         this.elementoFuego = elementoFuego;
         this.elementoAgua = elementoAgua;
         this.elementoRayo = elementoRayo;
@@ -36,44 +36,64 @@ public class Debilidades {
         this.List_Monstruos = null;
     }
 
-    public DebilElemento getElementoFuego() {
+    public DebilElementoFuego getElementoFuego() {
         return elementoFuego;
     }
 
-    public void setElementoFuego(DebilElemento elementoFuego) {
-        this.elementoFuego = elementoFuego;
+    public void setElementoFuego(boolean elementoFuego) {
+        if (elementoFuego) {
+            this.elementoFuego = DebilElementoFuego.elementoFuego;
+        } else {
+            this.elementoFuego = DebilElementoFuego.SinDebilidad;
+        }
     }
 
-    public DebilElemento getElementoAgua() {
+    public DebilElementoAgua getElementoAgua() {
         return elementoAgua;
     }
 
-    public void setElementoAgua(DebilElemento elementoAgua) {
-        this.elementoAgua = elementoAgua;
+    public void setElementoAgua(boolean elementoAgua) {
+        if (elementoAgua) {
+            this.elementoAgua = DebilElementoAgua.elementoAgua;
+        } else {
+            this.elementoAgua = DebilElementoAgua.SinDebilidad;
+        }
     }
 
-    public DebilElemento getElementoRayo() {
+    public DebilElementoRayo getElementoRayo() {
         return elementoRayo;
     }
 
-    public void setElementoRayo(DebilElemento elementoRayo) {
-        this.elementoRayo = elementoRayo;
+    public void setElementoRayo(boolean elementoRayo) {
+        if (elementoRayo) {
+            this.elementoRayo = DebilElementoRayo.elementoRayo;
+        } else {
+            this.elementoRayo = DebilElementoRayo.SinDebilidad;
+        }
     }
 
-    public DebilElemento getElementoHielo() {
+    public DebilElementoHielo getElementoHielo() {
         return elementoHielo;
     }
 
-    public void setElementoHielo(DebilElemento elementoHielo) {
-        this.elementoHielo = elementoHielo;
+    public void setElementoHielo(boolean elementoHielo) {
+        if (elementoHielo) {
+            this.elementoHielo = DebilElementoHielo.elementoHielo;
+        } else {
+            this.elementoHielo = DebilElementoHielo.SinDebilidad;
+        }
     }
 
-    public DebilElemento getElementoDraco() {
+    public DebilElementoDraco getElementoDraco() {
         return elementoDraco;
     }
 
-    public void setElementoDraco(DebilElemento elementoDraco) {
-        this.elementoDraco = elementoDraco;
+    public void setElementoDraco(boolean elementoDraco) {
+        if (elementoDraco) {
+            this.elementoDraco = DebilElementoDraco.elementoDraco;
+        } else {
+            this.elementoDraco = DebilElementoDraco.SinDebilidad;
+        }
     }
 
     public int getEfectividadFuego() {

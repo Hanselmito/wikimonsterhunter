@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.DebilidadesController">
+   <children>
+      <TableView fx:id="table" layoutX="486.0" layoutY="31.0" prefHeight="348.0" prefWidth="89.0" AnchorPane.bottomAnchor="20.666666666666686" AnchorPane.rightAnchor="24.66666666666667" AnchorPane.topAnchor="31.0">
+        <columns>
+          <TableColumn fx:id="ID" prefWidth="88.00002034505208" text="ID" />
+        </columns>
+      </TableView>
+      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <Button fx:id="insert" layoutX="19.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#handleInsertButtonAction" text="Insert" AnchorPane.bottomAnchor="14.666666666666686" AnchorPane.leftAnchor="19.0" />
+      <Button fx:id="update" layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#handleUpdateButtonAction" text="Update" AnchorPane.bottomAnchor="46.66666666666667" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="delete" layoutX="17.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#handleDeleteButtonAction" text="Delete" AnchorPane.bottomAnchor="81.66666666666669" AnchorPane.leftAnchor="17.0" />
+      <Pane layoutX="106.0" layoutY="39.0" prefHeight="158.0" prefWidth="367.0" AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="126.66666666666669" AnchorPane.topAnchor="39.0">
+         <children>
+            <CheckBox fx:id="elementoFuego" layoutX="14.0" layoutY="26.0" mnemonicParsing="false" text="Fuego" />
+            <CheckBox fx:id="elementoRayo" layoutX="15.0" layoutY="62.0" mnemonicParsing="false" text="Rayo" />
+            <CheckBox fx:id="elementoDraco" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" text="Draco" />
+            <CheckBox fx:id="elementoAgua" layoutX="111.0" layoutY="26.0" mnemonicParsing="false" text="Agua" />
+            <CheckBox fx:id="elementoHielo" layoutX="111.0" layoutY="62.0" mnemonicParsing="false" text="Hielo" />
+            <Label layoutX="3.0" text="Elementos Debiles" />
+         </children>
+      </Pane>
+      <Pane layoutX="108.0" layoutY="218.0" prefHeight="167.0" prefWidth="367.0" AnchorPane.leftAnchor="108.0" AnchorPane.rightAnchor="124.66666666666669" AnchorPane.topAnchor="218.0">
+         <children>
+            <TextField fx:id="efectividadFuego" layoutX="14.0" layoutY="36.0" promptText="Fuego" />
+            <TextField fx:id="efectividadAgua" layoutX="177.0" layoutY="36.0" promptText="Agua" />
+            <TextField fx:id="efectividadRayo" layoutX="14.0" layoutY="71.0" promptText="Rayo" />
+            <TextField fx:id="efectividadHielo" layoutX="177.0" layoutY="71.0" promptText="Hielo" />
+            <TextField fx:id="efectividadDraco" layoutX="14.0" layoutY="106.0" promptText="Draco" />
+            <TextField fx:id="idMonstruo" layoutX="205.0" layoutY="131.0" promptText="IDMonstruo" />
+            <Label layoutX="14.0" layoutY="14.0" text="Efectividad" />
+            <Label layoutX="205.0" layoutY="110.0" text="IDMonstruo" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

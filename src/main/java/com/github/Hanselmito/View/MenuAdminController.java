@@ -34,6 +34,8 @@ public class MenuAdminController extends Controller implements Initializable {
     private Label MSC;
     @FXML
     private Label FSC;
+    @FXML
+    private Label DSC;
 
 
     @Override
@@ -54,7 +56,14 @@ public class MenuAdminController extends Controller implements Initializable {
             }
         });
         FSC.setText(FisiologiaController.class.getSimpleName());
-        //image3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen3));
+        image3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                App.currentController.changeScene(Scenes.DebilidadesController, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        DSC.setText(DebilidadesController.class.getSimpleName());
         //image4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen4));
         //image5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen5));
         //image6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen6));
