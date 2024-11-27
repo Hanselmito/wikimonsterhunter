@@ -218,15 +218,15 @@ public class FisiologiaController extends Controller implements Initializable {
     }
 
     private void ViewSelectedID(){
-        Fisiologia selectedMonstruos = table.getSelectionModel().getSelectedItem();
-        if (selectedMonstruos != null){
-            imageView.setImage(new Image(new ByteArrayInputStream(selectedMonstruos.getImagen())));
-            PuntosDebiles.setText(selectedMonstruos.getPuntos_debiles());
-            Corte.setText(String.valueOf(selectedMonstruos.getCorte()));
-            Impacto.setText(String.valueOf(selectedMonstruos.getImpacto()));
-            Disparo.setText(String.valueOf(selectedMonstruos.getDisparo()));
-            ParteRompibles.setText(selectedMonstruos.getPartes_rompibles());
-            IDMonstruos.setText(String.valueOf(selectedMonstruos.getId_monstruo()));
+        Fisiologia selectedFisiologia = table.getSelectionModel().getSelectedItem();
+        if (selectedFisiologia != null){
+            imageView.setImage(new Image(new ByteArrayInputStream(selectedFisiologia.getImagen())));
+            PuntosDebiles.setText(selectedFisiologia.getPuntos_debiles());
+            Corte.setText(String.valueOf(selectedFisiologia.getCorte()));
+            Impacto.setText(String.valueOf(selectedFisiologia.getImpacto()));
+            Disparo.setText(String.valueOf(selectedFisiologia.getDisparo()));
+            ParteRompibles.setText(selectedFisiologia.getPartes_rompibles());
+            IDMonstruos.setText(String.valueOf(selectedFisiologia.getId_monstruo()));
         }
     }
 

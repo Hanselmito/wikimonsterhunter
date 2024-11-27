@@ -1,7 +1,7 @@
 package com.github.Hanselmito.Entity.Enums;
 
 public enum DebilElementoRayo {
-    elementoRayo("Rayo"),
+    Rayo("Rayo"),
     SinDebilidad("SinDebilidad");
 
     private String PartOfDebilElementoRayo;

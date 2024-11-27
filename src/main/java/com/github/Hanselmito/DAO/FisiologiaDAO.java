@@ -2,9 +2,7 @@ package com.github.Hanselmito.DAO;
 
 import com.github.Hanselmito.Conection.SQLConection;
 import com.github.Hanselmito.Entity.Fisiologia;
-import com.github.Hanselmito.Entity.Monstruos;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +12,7 @@ import java.util.List;
 
 public class FisiologiaDAO implements DAO<Fisiologia>{
     private final static String INSERT = "INSERT INTO fisiologia (imagen, puntosDebiles, corte, impacto, disparo, parteRompibles, idMonstruo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private final static String UPDATE = "UPDATE fisiologia SET imagen=?, puntosDebiles=?, corte=?, impacto=?, disparo=?, parteRompibles=? WHERE idMonstruo=?";
+    private final static String UPDATE = "UPDATE fisiologia SET imagen=?, puntosDebiles=?, corte=?, impacto=?, disparo=?, parteRompibles=?, idMonstruo=? WHERE idMonstruo=?";
     private final static String DELETE = "DELETE FROM fisiologia WHERE idMonstruo=?";
     private final static String FINDALL = "SELECT * FROM fisiologia";
     private final static String FINDBYID = "SELECT * FROM fisiologia WHERE idMonstruo=?";
@@ -60,6 +58,7 @@ public class FisiologiaDAO implements DAO<Fisiologia>{
                 pst.setInt(5, entity.getDisparo());
                 pst.setString(6, entity.getPartes_rompibles());
                 pst.setInt(7, entity.getId_monstruo().getId());
+                pst.setInt(8, entity.getId_monstruo().getId());
                 pst.executeUpdate();
             }catch (Exception e){
                 e.printStackTrace();
