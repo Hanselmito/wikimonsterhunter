@@ -9,12 +9,12 @@ public class Armas {
     protected int id;
     protected byte[] imagen;
     protected String nombre;
-    protected int ataque = 100;
+    protected int ataque;
     protected Atributo atributo;
     protected String afilado;
     protected String afinidad;
-    protected int defensa = 11;
-    protected int ranuras = 3;
+    protected int defensa;
+    protected int ranuras;
     protected String materiales;
     protected Materiales id_materiales;
 
