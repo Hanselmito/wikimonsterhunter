@@ -23,15 +23,15 @@ public class DebilidadesController extends Controller implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML
-    private CheckBox elementoFuego;
+    private ChoiceBox<DebilElementoFuego> elementoFuego;
     @FXML
-    private CheckBox elementoAgua;
+    private ChoiceBox<DebilElementoAgua> elementoAgua;
     @FXML
-    private CheckBox elementoRayo;
+    private ChoiceBox<DebilElementoRayo> elementoRayo;
     @FXML
-    private CheckBox elementoHielo;
+    private ChoiceBox<DebilElementoHielo> elementoHielo;
     @FXML
-    private CheckBox elementoDraco;
+    private ChoiceBox<DebilElementoDraco> elementoDraco;
     @FXML
     private TextField efectividadFuego;
     @FXML
@@ -70,39 +70,50 @@ public class DebilidadesController extends Controller implements Initializable {
             }
         });
         ID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId_monstruo().getId()).asObject());
+        elementoFuego.getItems().addAll(DebilElementoFuego.values());
+        elementoAgua.getItems().addAll(DebilElementoAgua.values());
+        elementoRayo.getItems().addAll(DebilElementoRayo.values());
+        elementoHielo.getItems().addAll(DebilElementoHielo.values());
+        elementoDraco.getItems().addAll(DebilElementoDraco.values());
     }
 
     private void ViewSelectedID() {
-        Debilidades selectedMonstruos = table.getSelectionModel().getSelectedItem();
-        if (selectedMonstruos != null) {
-            elementoFuego.setSelected(selectedMonstruos.getElementoFuego() != DebilElementoFuego.SinDebilidad);
-            elementoAgua.setSelected(selectedMonstruos.getElementoAgua() != DebilElementoAgua.SinDebilidad);
-            elementoRayo.setSelected(selectedMonstruos.getElementoRayo() != DebilElementoRayo.SinDebilidad);
-            elementoHielo.setSelected(selectedMonstruos.getElementoHielo() != DebilElementoHielo.SinDebilidad);
-            elementoDraco.setSelected(selectedMonstruos.getElementoDraco() != DebilElementoDraco.SinDebilidad);
-            efectividadFuego.setText(String.valueOf(selectedMonstruos.getEfectividadFuego()));
-            efectividadAgua.setText(String.valueOf(selectedMonstruos.getEfectividadAgua()));
-            efectividadRayo.setText(String.valueOf(selectedMonstruos.getEfectividadRayo()));
-            efectividadHielo.setText(String.valueOf(selectedMonstruos.getEfectividadHielo()));
-            efectividadDraco.setText(String.valueOf(selectedMonstruos.getEfectividadDraco()));
-            idMonstruo.setText(String.valueOf(selectedMonstruos.getId_monstruo().getId()));
+        Debilidades selectedDebilidades = table.getSelectionModel().getSelectedItem();
+        if (selectedDebilidades != null) {
+            elementoFuego.setValue(selectedDebilidades.getElementoFuego());
+            elementoAgua.setValue(selectedDebilidades.getElementoAgua());
+            elementoRayo.setValue(selectedDebilidades.getElementoRayo());
+            elementoHielo.setValue(selectedDebilidades.getElementoHielo());
+            elementoDraco.setValue(selectedDebilidades.getElementoDraco());
+            efectividadFuego.setText(String.valueOf(selectedDebilidades.getEfectividadFuego()));
+            efectividadAgua.setText(String.valueOf(selectedDebilidades.getEfectividadAgua()));
+            efectividadRayo.setText(String.valueOf(selectedDebilidades.getEfectividadRayo()));
+            efectividadHielo.setText(String.valueOf(selectedDebilidades.getEfectividadHielo()));
+            efectividadDraco.setText(String.valueOf(selectedDebilidades.getEfectividadDraco()));
+            idMonstruo.setText(String.valueOf(selectedDebilidades.getId_monstruo()));
         }
     }
 
     private void LoadDebilidadesByIdData(){
-        List<Debilidades> monstruosList = dDAO.findByAll();
-        this.DebilidadesList = FXCollections.observableList(monstruosList);
+        List<Debilidades> debilidadesList = dDAO.findByAll();
+        this.DebilidadesList = FXCollections.observableList(debilidadesList);
         table.setItems(DebilidadesList);
     }
 
     @FXML
     public void handleInsertButtonAction() {
-        // Retrieve data from form fields
-        boolean fuego = elementoFuego.isSelected();
-        boolean agua = elementoAgua.isSelected();
-        boolean rayo = elementoRayo.isSelected();
-        boolean hielo = elementoHielo.isSelected();
-        boolean draco = elementoDraco.isSelected();
+        DebilElementoFuego elementFuego = elementoFuego.getValue();
+        DebilElementoAgua elementAgua = elementoAgua.getValue();
+        DebilElementoRayo elementRayo = elementoRayo.getValue();
+        DebilElementoHielo elementHielo = elementoHielo.getValue();
+        DebilElementoDraco elementDraco = elementoDraco.getValue();
+
+        String efectFuego = efectividadFuego.getText();
+        String efectAgua = efectividadAgua.getText();
+        String efectRayo = efectividadRayo.getText();
+        String efectHielo = efectividadHielo.getText();
+        String efectDraco = efectividadDraco.getText();
+        String idMonstruoValue = idMonstruo.getText();
 
         // Check if the input fields are not empty
         if (efectividadFuego.getText().isEmpty() || efectividadAgua.getText().isEmpty() ||
@@ -112,35 +123,35 @@ public class DebilidadesController extends Controller implements Initializable {
             return;
         }
 
-        int efectFuego = Integer.parseInt(efectividadFuego.getText());
-        int efectAgua = Integer.parseInt(efectividadAgua.getText());
-        int efectRayo = Integer.parseInt(efectividadRayo.getText());
-        int efectHielo = Integer.parseInt(efectividadHielo.getText());
-        int efectDraco = Integer.parseInt(efectividadDraco.getText());
-        int idMonstruoValue = Integer.parseInt(idMonstruo.getText());
-
-        Monstruos monstruo = MonstruosDAO.build().findById(idMonstruoValue);
+        Monstruos monstruo = MonstruosDAO.build().findById(Integer.parseInt(idMonstruoValue));
         if (monstruo == null) {
             showAlert("No existe el monstruo con el ID proporcionado.");
             return;
         }
 
+        // Check if a Debilidades entity with the same ID of Monstruo already exists
+        Debilidades existingDebilidad = dDAO.findById(monstruo.getId());
+        if (existingDebilidad != null) {
+            showAlert("Ya existe una entidad con el mismo ID de Monstruo.");
+            return;
+        }
+
         // Create a new Debilidades object
-        Debilidades debilidad = new Debilidades();
-        debilidad.setElementoFuego(fuego);
-        debilidad.setElementoAgua(agua);
-        debilidad.setElementoRayo(rayo);
-        debilidad.setElementoHielo(hielo);
-        debilidad.setElementoDraco(draco);
-        debilidad.setEfectividadFuego(efectFuego);
-        debilidad.setEfectividadAgua(efectAgua);
-        debilidad.setEfectividadRayo(efectRayo);
-        debilidad.setEfectividadHielo(efectHielo);
-        debilidad.setEfectividadDraco(efectDraco);
-        debilidad.setId_monstruo(monstruo);
+        Debilidades debilidades = new Debilidades();
+        debilidades.setElementoFuego(elementFuego);
+        debilidades.setElementoAgua(elementAgua);
+        debilidades.setElementoRayo(elementRayo);
+        debilidades.setElementoHielo(elementHielo);
+        debilidades.setElementoDraco(elementDraco);
+        debilidades.setEfectividadFuego(Integer.parseInt(efectFuego));
+        debilidades.setEfectividadAgua(Integer.parseInt(efectAgua));
+        debilidades.setEfectividadRayo(Integer.parseInt(efectRayo));
+        debilidades.setEfectividadHielo(Integer.parseInt(efectHielo));
+        debilidades.setEfectividadDraco(Integer.parseInt(efectDraco));
+        debilidades.setId_monstruo(monstruo);
 
         try {
-            dDAO.save(debilidad);
+            dDAO.save(debilidades);
             LoadDebilidadesByIdData();
             showAlert("Entidad insertada correctamente.");
         } catch (Exception e) {
@@ -158,36 +169,36 @@ public class DebilidadesController extends Controller implements Initializable {
             return;
         }
 
-        // Retrieve data from form fields
-        boolean fuego = elementoFuego.isSelected();
-        boolean agua = elementoAgua.isSelected();
-        boolean rayo = elementoRayo.isSelected();
-        boolean hielo = elementoHielo.isSelected();
-        boolean draco = elementoDraco.isSelected();
-        int efectFuego = Integer.parseInt(efectividadFuego.getText());
-        int efectAgua = Integer.parseInt(efectividadAgua.getText());
-        int efectRayo = Integer.parseInt(efectividadRayo.getText());
-        int efectHielo = Integer.parseInt(efectividadHielo.getText());
-        int efectDraco = Integer.parseInt(efectividadDraco.getText());
-        int idMonstruoValue = Integer.parseInt(idMonstruo.getText());
 
-        Monstruos monstruo = MonstruosDAO.build().findById(idMonstruoValue);
+        DebilElementoFuego elementFuego = elementoFuego.getValue();
+        DebilElementoAgua elementAgua = elementoAgua.getValue();
+        DebilElementoRayo elementRayo = elementoRayo.getValue();
+        DebilElementoHielo elementHielo = elementoHielo.getValue();
+        DebilElementoDraco elementDraco = elementoDraco.getValue();
+
+        String efectFuego = efectividadFuego.getText();
+        String efectAgua = efectividadAgua.getText();
+        String efectRayo = efectividadRayo.getText();
+        String efectHielo = efectividadHielo.getText();
+        String efectDraco = efectividadDraco.getText();
+        String idMonstruoValue = idMonstruo.getText();
+
+        Monstruos monstruo = MonstruosDAO.build().findById(Integer.parseInt(idMonstruoValue));
         if (monstruo == null) {
             showAlert("No existe el monstruo con el ID proporcionado.");
             return;
         }
 
-        // Update the selected Debilidades object
-        selectedDebilidad.setElementoFuego(fuego);
-        selectedDebilidad.setElementoAgua(agua);
-        selectedDebilidad.setElementoRayo(rayo);
-        selectedDebilidad.setElementoHielo(hielo);
-        selectedDebilidad.setElementoDraco(draco);
-        selectedDebilidad.setEfectividadFuego(efectFuego);
-        selectedDebilidad.setEfectividadAgua(efectAgua);
-        selectedDebilidad.setEfectividadRayo(efectRayo);
-        selectedDebilidad.setEfectividadHielo(efectHielo);
-        selectedDebilidad.setEfectividadDraco(efectDraco);
+        selectedDebilidad.setElementoFuego(elementFuego);
+        selectedDebilidad.setElementoAgua(elementAgua);
+        selectedDebilidad.setElementoRayo(elementRayo);
+        selectedDebilidad.setElementoHielo(elementHielo);
+        selectedDebilidad.setElementoDraco(elementDraco);
+        selectedDebilidad.setEfectividadFuego(Integer.parseInt(efectFuego));
+        selectedDebilidad.setEfectividadAgua(Integer.parseInt(efectAgua));
+        selectedDebilidad.setEfectividadRayo(Integer.parseInt(efectRayo));
+        selectedDebilidad.setEfectividadHielo(Integer.parseInt(efectHielo));
+        selectedDebilidad.setEfectividadDraco(Integer.parseInt(efectDraco));
         selectedDebilidad.setId_monstruo(monstruo);
 
         try {
