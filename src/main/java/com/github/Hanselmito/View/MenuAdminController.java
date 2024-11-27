@@ -36,6 +36,8 @@ public class MenuAdminController extends Controller implements Initializable {
     private Label FSC;
     @FXML
     private Label DSC;
+    @FXML
+    private Label ESC;
 
 
     @Override
@@ -64,7 +66,14 @@ public class MenuAdminController extends Controller implements Initializable {
             }
         });
         DSC.setText(DebilidadesController.class.getSimpleName());
-        //image4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen4));
+        image4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                App.currentController.changeScene(Scenes.EstadoController, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        ESC.setText(EstadoController.class.getSimpleName());
         //image5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen5));
         //image6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen6));
         //image7.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen7));
