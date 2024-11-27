@@ -1,10 +1,11 @@
 package com.github.Hanselmito.View;
 
 import com.github.Hanselmito.App;
+import com.github.Hanselmito.DAO.ArmasDAO;
 import com.github.Hanselmito.DAO.MaterialesDAO;
-import com.github.Hanselmito.DAO.MonstruosDAO;
+import com.github.Hanselmito.Entity.Armas;
+import com.github.Hanselmito.Entity.Enums.Atributo;
 import com.github.Hanselmito.Entity.Materiales;
-import com.github.Hanselmito.Entity.Monstruos;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,19 +23,27 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MaterialesController extends Controller implements Initializable {
+public class ArmasController extends Controller implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML
     private TextField Nombre;
     @FXML
-    private TextField DropRate;
+    private TextField Ataque;
     @FXML
-    private TextField Mediante;
+    private ChoiceBox atributo;
     @FXML
-    private TextField Cantidad;
+    private TextField Afilado;
     @FXML
-    private TextField IDMonstruo;
+    private TextField Afinidad;
+    @FXML
+    private TextField Defensa;
+    @FXML
+    private TextField Ranuras;
+    @FXML
+    private TextArea Materiales;
+    @FXML
+    private TextField IDMaterial;
     @FXML
     private Button file;
     @FXML
@@ -46,17 +55,17 @@ public class MaterialesController extends Controller implements Initializable {
     @FXML
     private Button Delete;
     @FXML
-    private TableView<Materiales> table;
+    private TableView<Armas> table;
     @FXML
-    private TableColumn<Materiales, Integer> ID;
+    private TableColumn<Armas, Integer> ID;
     @FXML
-    private TableColumn<Materiales, Integer> IDMonstruos;
+    private TableColumn<Armas, Integer> IDMateriales;
     @FXML
     private ImageView imageView;
 
-    private MaterialesDAO maDAO = new MaterialesDAO();
+    private ArmasDAO arDAO = new ArmasDAO();
 
-    private ObservableList<Materiales> MaterialesList;
+    private ObservableList<Armas> ArmasList;
 
     private File imageFile;
 
@@ -69,7 +78,8 @@ public class MaterialesController extends Controller implements Initializable {
             }
         });
         ID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-        IDMonstruos.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId_monstruo().getId()).asObject());
+        IDMateriales.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId_materiales().getId()).asObject());
+        atributo.getItems().addAll(Atributo.values());
     }
 
     @FXML
@@ -101,21 +111,25 @@ public class MaterialesController extends Controller implements Initializable {
     }
 
     private void LoadMaterialesByIdData(){
-        List<Materiales> materialesList = maDAO.findAll();
-        this.MaterialesList = FXCollections.observableList(materialesList);
-        table.setItems(MaterialesList);
+        List<Armas> armasList = arDAO.findALL();
+        this.ArmasList = FXCollections.observableList(armasList);
+        table.setItems(ArmasList);
     }
 
     @FXML
     public void handleInsertButtonAction() throws IOException {
         String nombre = Nombre.getText();
-        String dropRate = DropRate.getText();
-        String mediante = Mediante.getText();
-        String cantidad = Cantidad.getText();
-        String idMonstruo = IDMonstruo.getText();
+        String ataque = Ataque.getText();
+        Atributo atributoValue = (Atributo) atributo.getValue();
+        String afilado = Afilado.getText();
+        String afinidad = Afinidad.getText();
+        String defensa = Defensa.getText();
+        String ranuras = Ranuras.getText();
+        String materiales = Materiales.getText();
+        String idMaterial = IDMaterial.getText();
 
-        Monstruos monstruos = MonstruosDAO.build().findById(Integer.parseInt(idMonstruo));
-        if (monstruos == null) {
+        Materiales material = MaterialesDAO.build().findById(Integer.parseInt(idMaterial));
+        if (material == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("no existe el monstruo");
             alert.show();
@@ -129,16 +143,20 @@ public class MaterialesController extends Controller implements Initializable {
         fis.close();
 
         // Create a new Monstruos object
-        Materiales materiales = new Materiales();
-        materiales.setImagen(imageData);
-        materiales.setNombre(nombre);
-        materiales.setDropRate(dropRate);
-        materiales.setMediante(mediante);
-        materiales.setCantidad(Integer.parseInt(cantidad));
-        materiales.setId_monstruo(monstruos);
+        Armas armas = new Armas();
+        armas.setImagen(imageData);
+        armas.setNombre(nombre);
+        armas.setAtaque(Integer.parseInt(ataque));
+        armas.setAtributo(atributoValue);
+        armas.setAfilado(afilado);
+        armas.setAfinidad(afinidad);
+        armas.setDefensa(Integer.parseInt(defensa));
+        armas.setRanuras(Integer.parseInt(ranuras));
+        armas.setMateriales(materiales);
+        armas.setId_materiales(material);
 
         try {
-            maDAO.save(materiales);
+            arDAO.save(armas);
             LoadMaterialesByIdData();
             showAlert("Entidad Insertada compruébalo");
         } catch (Exception e) {
@@ -149,8 +167,8 @@ public class MaterialesController extends Controller implements Initializable {
 
     @FXML
     public void handleUpdateButtonAction() throws IOException {
-        // Retrieve the selected Materiales object from the table
-        Materiales selectedMaterial = table.getSelectionModel().getSelectedItem();
+        // Retrieve the selected Monstruos object from the table
+        Armas selectedMaterial = table.getSelectionModel().getSelectedItem();
         if (selectedMaterial == null) {
             showAlert("Seleccione un material para actualizar.");
             return;
@@ -158,13 +176,17 @@ public class MaterialesController extends Controller implements Initializable {
 
         // Retrieve data from form fields
         String nombre = Nombre.getText();
-        String dropRate = DropRate.getText();
-        String mediante = Mediante.getText();
-        String cantidad = Cantidad.getText();
-        String idMonstruo = IDMonstruo.getText();
+        String ataque = Ataque.getText();
+        Atributo atributoValue = (Atributo) atributo.getValue();
+        String afilado = Afilado.getText();
+        String afinidad = Afinidad.getText();
+        String defensa = Defensa.getText();
+        String ranuras = Ranuras.getText();
+        String materiales = Materiales.getText();
+        String idMaterial = IDMaterial.getText();
 
-        Monstruos monstruos = MonstruosDAO.build().findById(Integer.parseInt(idMonstruo));
-        if (monstruos == null) {
+        Materiales material = MaterialesDAO.build().findById(Integer.parseInt(idMaterial));
+        if (material == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("no existe el monstruo");
             alert.show();
@@ -177,16 +199,20 @@ public class MaterialesController extends Controller implements Initializable {
         fis.read(imageData);
         fis.close();
 
-        // Update the selected Materiales object with new data
+        // Create a new Monstruos object
         selectedMaterial.setImagen(imageData);
         selectedMaterial.setNombre(nombre);
-        selectedMaterial.setDropRate(dropRate);
-        selectedMaterial.setMediante(mediante);
-        selectedMaterial.setCantidad(Integer.parseInt(cantidad));
-        selectedMaterial.setId_monstruo(monstruos);
+        selectedMaterial.setAtaque(Integer.parseInt(ataque));
+        selectedMaterial.setAtributo(atributoValue);
+        selectedMaterial.setAfilado(afilado);
+        selectedMaterial.setAfinidad(afinidad);
+        selectedMaterial.setDefensa(Integer.parseInt(defensa));
+        selectedMaterial.setRanuras(Integer.parseInt(ranuras));
+        selectedMaterial.setMateriales(materiales);
+        selectedMaterial.setId_materiales(material);
 
         try {
-            maDAO.update(selectedMaterial);
+            arDAO.update(selectedMaterial);
             LoadMaterialesByIdData();
             showAlert("Entidad actualizada correctamente.");
         } catch (Exception e) {
@@ -197,14 +223,14 @@ public class MaterialesController extends Controller implements Initializable {
 
     @FXML
     public void handleDeleteButtonAction() throws IOException {
-        Materiales selectedMonstruos = table.getSelectionModel().getSelectedItem();
-        if (selectedMonstruos == null) {
-            showAlert("Seleccione un monstruo para eliminar.");
+        Armas selectedMaterial = table.getSelectionModel().getSelectedItem();
+        if (selectedMaterial == null) {
+            showAlert("Seleccione un material para eliminar.");
             return;
         }
 
         try {
-            maDAO.delete(selectedMonstruos);
+            arDAO.delete(selectedMaterial);
             LoadMaterialesByIdData();
             showAlert("Entidad eliminada correctamente.");
         } catch (Exception e) {
@@ -214,14 +240,18 @@ public class MaterialesController extends Controller implements Initializable {
     }
 
     private void ViewSelectedID(){
-        Materiales selectedMateriales = table.getSelectionModel().getSelectedItem();
+        Armas selectedMateriales = table.getSelectionModel().getSelectedItem();
         if (selectedMateriales != null){
             imageView.setImage(new Image(new ByteArrayInputStream(selectedMateriales.getImagen())));
             Nombre.setText(selectedMateriales.getNombre());
-            DropRate.setText(selectedMateriales.getDropRate());
-            Mediante.setText(selectedMateriales.getMediante());
-            Cantidad.setText(String.valueOf(selectedMateriales.getCantidad()));
-            IDMonstruo.setText(String.valueOf(selectedMateriales.getId_monstruo().getId()));
+            Ataque.setText(String.valueOf(selectedMateriales.getAtaque()));
+            atributo.setValue(selectedMateriales.getAtributo());
+            Afilado.setText(selectedMateriales.getAfilado());
+            Afinidad.setText(selectedMateriales.getAfinidad());
+            Defensa.setText(String.valueOf(selectedMateriales.getDefensa()));
+            Ranuras.setText(String.valueOf(selectedMateriales.getRanuras()));
+            Materiales.setText(selectedMateriales.getMateriales());
+            IDMaterial.setText(String.valueOf(selectedMateriales.getId_materiales().getId()));
         }
     }
 

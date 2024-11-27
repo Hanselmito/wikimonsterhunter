@@ -180,14 +180,13 @@ public class FisiologiaController extends Controller implements Initializable {
         fis.close();
 
         // Create a new Monstruos object
-        Fisiologia fio = new Fisiologia();
-        fio.setImagen(imageData);
-        fio.setPuntos_debiles(puntoDebiles);
-        fio.setCorte(Integer.parseInt(corte));
-        fio.setImpacto(Integer.parseInt(impacto));
-        fio.setDisparo(Integer.parseInt(disparo));
-        fio.setPartes_rompibles(parteRompibles);
-        fio.setId_monstruo(monstruos);
+        selectedMonstruos.setImagen(imageData);
+        selectedMonstruos.setPuntos_debiles(puntoDebiles);
+        selectedMonstruos.setCorte(Integer.parseInt(corte));
+        selectedMonstruos.setImpacto(Integer.parseInt(impacto));
+        selectedMonstruos.setDisparo(Integer.parseInt(disparo));
+        selectedMonstruos.setPartes_rompibles(parteRompibles);
+        selectedMonstruos.setId_monstruo(monstruos);
 
         try {
             fioDAO.update(selectedMonstruos);
