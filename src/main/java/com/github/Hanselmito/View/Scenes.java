@@ -5,6 +5,7 @@ public enum Scenes {
     MonstruosController("View/MonstruosController.fxml"),
     FisiologiaController("View/FisiologiaController.fxml"),
     DebilidadesController("View/DebilidadesController.fxml"),
+    EstadoController("View/EstadoController.fxml"),
     MenuAdmin("View/MenuAdmin.fxml"),
     Menu("View/Menu.fxml");
 

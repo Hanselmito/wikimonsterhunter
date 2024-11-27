@@ -1,16 +1,16 @@
 package com.github.Hanselmito.Entity;
 
-import com.github.Hanselmito.Entity.Enums.AlteraEstado;
+import com.github.Hanselmito.Entity.Enums.*;
 
 import java.util.List;
 
 
 public class Estado {
-    protected AlteraEstado estadoVeneno = AlteraEstado.estadoVeneno;
-    protected AlteraEstado estadoSueno = AlteraEstado.estadoSueno;
-    protected AlteraEstado estadoParalisis = AlteraEstado.estadoParalisis;
-    protected AlteraEstado estadoNitro = AlteraEstado.estadoNitro;
-    protected AlteraEstado estadoAturdimiento = AlteraEstado.estadoAturdimiento;
+    protected EstadoVeneno estadoVeneno = EstadoVeneno.SinEfecto;
+    protected EstadoSueno estadoSueno = EstadoSueno.SinEfecto;
+    protected EstadoParalisis estadoParalisis = EstadoParalisis.SinEfecto;
+    protected EstadoNitro estadoNitro = EstadoNitro.SinEfecto;
+    protected EstadoAturdimiento estadoAturdimiento = EstadoAturdimiento.SinEfecto;
     protected int efectividadVeneno;
     protected int efectividadSueno;
     protected int efectividadParalisis;
@@ -22,7 +22,7 @@ public class Estado {
     public Estado() {
     }
 
-    public Estado(AlteraEstado estadoVeneno, AlteraEstado estadoSueno, AlteraEstado estadoParalisis, AlteraEstado estadoNitro, AlteraEstado estadoAturdimiento, int efectividadVeneno, int efectividadSueno, int efectividadParalisis, int efectividadNitro, int efectividadAturdimiento, Monstruos id_monstruo) {
+    public Estado(EstadoVeneno estadoVeneno, EstadoSueno estadoSueno, EstadoParalisis estadoParalisis, EstadoNitro estadoNitro, EstadoAturdimiento estadoAturdimiento, int efectividadVeneno, int efectividadSueno, int efectividadParalisis, int efectividadNitro, int efectividadAturdimiento, Monstruos id_monstruo, List<Monstruos> list_Monstruos) {
         this.estadoVeneno = estadoVeneno;
         this.estadoSueno = estadoSueno;
         this.estadoParalisis = estadoParalisis;
@@ -37,43 +37,43 @@ public class Estado {
         this.List_Monstruos = null;
     }
 
-    public AlteraEstado getEstadoVeneno() {
+    public EstadoVeneno getEstadoVeneno() {
         return estadoVeneno;
     }
 
-    public void setEstadoVeneno(AlteraEstado estadoVeneno) {
+    public void setEstadoVeneno(EstadoVeneno estadoVeneno) {
         this.estadoVeneno = estadoVeneno;
     }
 
-    public AlteraEstado getEstadoSueno() {
+    public EstadoSueno getEstadoSueno() {
         return estadoSueno;
     }
 
-    public void setEstadoSueno(AlteraEstado estadoSueno) {
+    public void setEstadoSueno(EstadoSueno estadoSueno) {
         this.estadoSueno = estadoSueno;
     }
 
-    public AlteraEstado getEstadoParalisis() {
+    public EstadoParalisis getEstadoParalisis() {
         return estadoParalisis;
     }
 
-    public void setEstadoParalisis(AlteraEstado estadoParalisis) {
+    public void setEstadoParalisis(EstadoParalisis estadoParalisis) {
         this.estadoParalisis = estadoParalisis;
     }
 
-    public AlteraEstado getEstadoNitro() {
+    public EstadoNitro getEstadoNitro() {
         return estadoNitro;
     }
 
-    public void setEstadoNitro(AlteraEstado estadoNitro) {
+    public void setEstadoNitro(EstadoNitro estadoNitro) {
         this.estadoNitro = estadoNitro;
     }
 
-    public AlteraEstado getEstadoAturdimiento() {
+    public EstadoAturdimiento getEstadoAturdimiento() {
         return estadoAturdimiento;
     }
 
-    public void setEstadoAturdimiento(AlteraEstado estadoAturdimiento) {
+    public void setEstadoAturdimiento(EstadoAturdimiento estadoAturdimiento) {
         this.estadoAturdimiento = estadoAturdimiento;
     }
 

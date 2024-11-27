@@ -130,11 +130,11 @@ public class DebilidadesController extends Controller implements Initializable {
         }
 
         // Check if a Debilidades entity with the same ID of Monstruo already exists
-        Debilidades existingDebilidad = dDAO.findById(monstruo.getId());
+        /**Debilidades existingDebilidad = dDAO.findById(monstruo.getId());
         if (existingDebilidad != null) {
             showAlert("Ya existe una entidad con el mismo ID de Monstruo.");
             return;
-        }
+        }**/
 
         // Create a new Debilidades object
         Debilidades debilidades = new Debilidades();
