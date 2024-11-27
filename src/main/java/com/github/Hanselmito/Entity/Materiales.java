@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Materiales {
-    protected int id = 20;
+    protected int id;
     protected byte[] imagen;
     protected String nombre;
     protected String dropRate;

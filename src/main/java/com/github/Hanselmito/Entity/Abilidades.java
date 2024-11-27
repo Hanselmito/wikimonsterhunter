@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Abilidades {
     protected int id;
     protected String nombre;
-    protected int nivel = 10;
+    protected int nivel;
     protected String descripcion;
     protected String set;
     protected List<Equipo> List_Equipo;
