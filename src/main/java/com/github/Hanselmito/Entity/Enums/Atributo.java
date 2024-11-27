@@ -9,7 +9,8 @@ public enum Atributo {
     Sueno("Sueno"),
     Paralisis("Paralisis"),
     Nitro("Nitro"),
-    Veneno("Veneno");
+    Veneno("Veneno"),
+    SinAtributo("SinAtributo");
 
     private String PartOfAtributo;
     Atributo(String partOfAtributo) {

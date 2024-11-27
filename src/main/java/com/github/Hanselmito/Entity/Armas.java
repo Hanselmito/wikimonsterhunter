@@ -10,7 +10,7 @@ public class Armas {
     protected byte[] imagen;
     protected String nombre;
     protected int ataque;
-    protected Atributo atributo;
+    protected Atributo atributo = Atributo.SinAtributo;
     protected String afilado;
     protected String afinidad;
     protected int defensa;

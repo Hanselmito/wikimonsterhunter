@@ -40,6 +40,8 @@ public class MenuAdminController extends Controller implements Initializable {
     private Label ESC;
     @FXML
     private Label MASC;
+    @FXML
+    private Label ARSC;
 
 
     @Override
@@ -83,9 +85,17 @@ public class MenuAdminController extends Controller implements Initializable {
                 e.printStackTrace();
             }
         });
-        MASC.setText(EstadoController.class.getSimpleName());
-        //image6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen6));
+        MASC.setText(MaterialesController.class.getSimpleName());
+        image6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                App.currentController.changeScene(Scenes.ArmasController, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        ARSC.setText(ArmasController.class.getSimpleName());
         //image7.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen7));
+        //image8.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen7));
     }
 
 

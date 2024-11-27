@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MaterialesDAO implements DAO<Materiales>{
-    private final static String INSERT = "INSERT INTO materiales (id, imagen, nombre, dropRate, mediante, cantidad, idMonstruo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final static String INSERT = "INSERT INTO materiales (imagen, nombre, dropRate, mediante, cantidad, idMonstruo) VALUES (?, ?, ?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE materiales SET imagen=?, nombre=?, dropRate=?, mediante=?, cantidad=?, idMonstruo=? WHERE id=?";
     private final static String DELETE = "DELETE FROM materiales WHERE id=?";
     private final static String FINDALL = "SELECT * FROM materiales";
@@ -30,13 +30,12 @@ public class MaterialesDAO implements DAO<Materiales>{
         Materiales m = findById(entity.getId_monstruo().getId());
         if(m!=null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT)) {
-                pst.setInt(1, entity.getId());
-                pst.setBytes(2, entity.getImagen());
-                pst.setString(3, entity.getNombre());
-                pst.setString(4, entity.getDropRate());
-                pst.setString(5, entity.getMediante());
-                pst.setInt(6, entity.getCantidad());
-                pst.setInt(7, entity.getId_monstruo().getId());
+                pst.setBytes(1, entity.getImagen());
+                pst.setString(2, entity.getNombre());
+                pst.setString(3, entity.getDropRate());
+                pst.setString(4, entity.getMediante());
+                pst.setInt(5, entity.getCantidad());
+                pst.setInt(6, entity.getId_monstruo().getId());
                 pst.executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -125,5 +124,9 @@ public class MaterialesDAO implements DAO<Materiales>{
     @Override
     public void close() throws IOException {
 
+    }
+
+    public static MaterialesDAO build(){
+        return new MaterialesDAO();
     }
 }
