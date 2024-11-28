@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AbilidadesDAO implements DAO<Abilidades>{
-    private static final String INSERT = "INSERT INTO abilidades (nombre, nivel, descripcion, set) VALUES (?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE abilidades SET nombre=?, nivel=?, descripcion=?, set=? WHERE id=?";
+    private static final String INSERT = "INSERT INTO abilidades (imagen, nombre, nivel, descripcion, equip) VALUES (?, ?, ?, ?, ?)";
+    private static final String UPDATE = "UPDATE abilidades SET imagen=?, nombre=?, nivel=?, descripcion=?, equip=? WHERE id=?";
     private static final String DELETE = "DELETE FROM abilidades WHERE id=?";
     private static final String FINDALL = "SELECT * FROM abilidades";
     private static final String FINDBYID = "SELECT * FROM abilidades WHERE id=?";
@@ -26,21 +26,31 @@ public class AbilidadesDAO implements DAO<Abilidades>{
 
     @Override
     public Abilidades save(Abilidades entity) {
-        Abilidades result = entity;
-        if (entity==null || entity.getId()==0) return result;
-        Abilidades ab = findById(entity.getId());
-        if(ab!=null) {
-            try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT)) {
-                pst.setString(1, entity.getNombre());
-                pst.setInt(2, entity.getNivel());
-                pst.setString(3, entity.getDescripcion());
-                pst.setString(4, entity.getSet());
-                pst.executeUpdate();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+        if (entity == null) {
+            System.out.println("La entidad es nula.");
+            return null;
         }
-        return result;
+        try (PreparedStatement pst = conn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            pst.setBytes(1, entity.getImagen());
+            pst.setString(2, entity.getNombre());
+            pst.setInt(3, entity.getNivel());
+            pst.setString(4, entity.getDescripcion());
+            pst.setString(5, entity.getEquip());
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("La inserción de la entidad falló, no se afectaron filas.");
+            }
+            try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    entity.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("La inserción de la entidad falló, no se obtuvo el ID.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entity;
     }
 
     @Override
@@ -48,11 +58,12 @@ public class AbilidadesDAO implements DAO<Abilidades>{
         Abilidades result = entity;
         if (entity==null || entity.getId()==0) return result;
         try(PreparedStatement pst = SQLConection.getConnection().prepareStatement(UPDATE)){
-            pst.setString(1, entity.getNombre());
-            pst.setInt(2, entity.getNivel());
-            pst.setString(3, entity.getDescripcion());
-            pst.setString(4, entity.getSet());
-            pst.setInt(5, entity.getId());
+            pst.setBytes(1, entity.getImagen());
+            pst.setString(2, entity.getNombre());
+            pst.setInt(3, entity.getNivel());
+            pst.setString(4, entity.getDescripcion());
+            pst.setString(5, entity.getEquip());
+            pst.setInt(6, entity.getId());
             pst.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
@@ -80,10 +91,11 @@ public class AbilidadesDAO implements DAO<Abilidades>{
             try(ResultSet res = pst.executeQuery()){
                 if(res.next()){
                     result.setId(res.getInt("id"));
+                    result.setImagen(res.getBytes("imagen"));
                     result.setNombre(res.getString("nombre"));
                     result.setNivel(res.getInt("nivel"));
                     result.setDescripcion(res.getString("descripcion"));
-                    result.setSet(res.getString("set"));
+                    result.setEquip(res.getString("equip"));
                 }
             }
         }catch (SQLException e){
@@ -99,10 +111,11 @@ public class AbilidadesDAO implements DAO<Abilidades>{
             while (res.next()) {
                 Abilidades ab = new Abilidades();
                 ab.setId(res.getInt("id"));
+                ab.setImagen(res.getBytes("imagen"));
                 ab.setNombre(res.getString("nombre"));
                 ab.setNivel(res.getInt("nivel"));
                 ab.setDescripcion(res.getString("descripcion"));
-                ab.setSet(res.getString("set"));
+                ab.setEquip(res.getString("equip"));
                 result.add(ab);
             }
         }catch (SQLException e) {

@@ -44,6 +44,8 @@ public class MenuAdminController extends Controller implements Initializable {
     private Label ARSC;
     @FXML
     private Label EQSC;
+    @FXML
+    private Label ABSC;
 
 
     @Override
@@ -104,7 +106,15 @@ public class MenuAdminController extends Controller implements Initializable {
             }
         });
         EQSC.setText(EquipoController.class.getSimpleName());
-        //image8.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen7));
+        image8.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                App.currentController.changeScene(Scenes.AbilidadesController, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        ABSC.setText(AbilidadesController.class.getSimpleName());
+        //image9.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen7));
     }
 
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.AbilidadesController">
+    <children>
+        <TextField fx:id="Nombre" layoutX="133.0" layoutY="56.0" promptText="Nombre" />
+        <TextField fx:id="nivel" layoutX="133.0" layoutY="117.0" promptText="Nivel" />
+        <TextField fx:id="descripcion" layoutX="133.0" layoutY="171.0" promptText="Descripcion" />
+        <Label layoutX="133.0" layoutY="38.0" text="Nombre" />
+        <Label layoutX="136.0" layoutY="93.0" text="Nivel" />
+        <Label layoutX="136.0" layoutY="147.0" text="Descripcion" />
+        <Button fx:id="insert" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#handleInsertButtonAction" text="Insert" />
+        <TableView fx:id="table" layoutX="418.0" layoutY="26.0" prefHeight="342.0" prefWidth="61.0">
+            <columns>
+                <TableColumn fx:id="ID" minWidth="9.33331298828125" prefWidth="59.99998982747396" text="ID" />
+            </columns>
+        </TableView>
+        <Button fx:id="update" layoutX="14.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#handleUpdateButtonAction" text="Update" />
+        <Button fx:id="Back" layoutX="17.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back" />
+        <Button fx:id="Delete" layoutX="16.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#handleDeleteButtonAction" text="Delete" />
+      <TextField fx:id="Equip" layoutX="133.0" layoutY="231.0" promptText="Equip" />
+      <Label layoutX="136.0" layoutY="207.0" text="Equip" />
+      <ImageView fx:id="imageView" fitHeight="40.0" fitWidth="46.0" layoutX="209.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="file" layoutX="138.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#loadImage" text="File" />
+    </children>
+</AnchorPane>
