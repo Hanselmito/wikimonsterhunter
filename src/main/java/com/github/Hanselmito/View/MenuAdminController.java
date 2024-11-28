@@ -46,6 +46,8 @@ public class MenuAdminController extends Controller implements Initializable {
     private Label EQSC;
     @FXML
     private Label ABSC;
+    @FXML
+    private Button Otorga;
 
 
     @Override
@@ -114,10 +116,7 @@ public class MenuAdminController extends Controller implements Initializable {
             }
         });
         ABSC.setText(AbilidadesController.class.getSimpleName());
-        //image9.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> navigateToScreen(Scenes.Screen7));
     }
-
-
 
     @Override
     public void onOpen(Object input) throws Exception {
@@ -127,6 +126,11 @@ public class MenuAdminController extends Controller implements Initializable {
     @Override
     public void onClose(Object output) {
         // Implement any logic needed when the screen is closed
+    }
+
+    @FXML
+    private void goOtorga() throws Exception {
+        App.currentController.changeScene(Scenes.OtorgaController,null);
     }
 
     @FXML
