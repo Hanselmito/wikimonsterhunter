@@ -8,6 +8,9 @@ public enum Scenes {
     EstadoController("View/EstadoController.fxml"),
     MaterialesController("View/MaterialesController.fxml"),
     ArmasController("View/ArmasController.fxml"),
+    EquipoController("View/EquipoController.fxml"),
+    HabilidadesController("View/HabilidadesController.fxml"),
+    OtorgaController("View/OtorgaController.fxml"),
     MenuAdmin("View/MenuAdmin.fxml"),
     Menu("View/Menu.fxml");
 
