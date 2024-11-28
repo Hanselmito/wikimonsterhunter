@@ -20,7 +20,10 @@
          <image>
             <Image url="@../../../../Icons/Estado-MHW_Plaga_de_Draco.jpg" />
          </image></ImageView>
-        <ImageView fx:id="image8" fitHeight="100.0" fitWidth="100.0" layoutX="475.0" layoutY="200.0" />
+        <ImageView fx:id="image8" fitHeight="100.0" fitWidth="100.0" layoutX="475.0" layoutY="200.0">
+         <image>
+            <Image url="@../../../../Icons/MHW-Icono_Habilidad_Rojo.jpg" />
+         </image></ImageView>
         <ImageView fx:id="image6" fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="200.0">
          <image>
             <Image url="@../../../../Icons/MHFU-Render_EyE_Rathalos_3.jpg" />
@@ -45,5 +48,6 @@
       <Label fx:id="MASC" layoutX="39.0" layoutY="300.0" prefHeight="17.0" prefWidth="100.0" text="5" />
       <Label fx:id="ARSC" layoutX="200.0" layoutY="300.0" prefHeight="17.0" prefWidth="100.0" text="6" />
       <Label fx:id="EQSC" layoutX="350.0" layoutY="300.0" prefHeight="17.0" prefWidth="100.0" text="7" />
+      <Label fx:id="ABSC" layoutX="475.0" layoutY="300.0" prefHeight="17.0" prefWidth="100.0" text="8" />
     </children>
 </AnchorPane>

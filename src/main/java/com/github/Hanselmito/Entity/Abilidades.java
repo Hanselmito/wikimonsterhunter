@@ -1,25 +1,28 @@
 package com.github.Hanselmito.Entity;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Abilidades {
     protected int id;
+    protected byte[] imagen;
     protected String nombre;
     protected int nivel;
     protected String descripcion;
-    protected String set;
+    protected String equip;
     protected List<Equipo> List_Equipo;
 
     public Abilidades() {
     }
 
-    public Abilidades(int id, String nombre, int nivel, String descripcion, String set) {
+    public Abilidades(int id, byte[] imagen, String nombre, int nivel, String descripcion, String equip) {
         this.id = id;
+        this.imagen = imagen;
         this.nombre = nombre;
         this.nivel = nivel;
         this.descripcion = descripcion;
-        this.set = set;
+        this.equip = equip;
         this.List_Equipo = null;
     }
 
@@ -29,6 +32,14 @@ public class Abilidades {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -55,12 +66,12 @@ public class Abilidades {
         this.descripcion = descripcion;
     }
 
-    public String getSet() {
-        return set;
+    public String getEquip() {
+        return equip;
     }
 
-    public void setSet(String set) {
-        this.set = set;
+    public void setEquip(String equip) {
+        this.equip = equip;
     }
 
     public List<Equipo> getList_Equipo() {
@@ -88,10 +99,11 @@ public class Abilidades {
     public String toString() {
         return "Abilidades{" +
                 "id=" + id +
+                ", imagen=" + Arrays.toString(imagen) +
                 ", nombre='" + nombre + '\'' +
                 ", nivel=" + nivel +
                 ", descripcion='" + descripcion + '\'' +
-                ", set='" + set + '\'' +
+                ", set='" + equip + '\'' +
                 ", List_Equipo=" + List_Equipo +
                 '}';
     }
