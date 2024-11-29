@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Monstruos {
-    protected int id = 20;
+    protected int id;
     protected String nombre;
     protected String titulos;
     protected Clase clase;

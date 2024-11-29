@@ -2,6 +2,7 @@ package com.github.Hanselmito.View;
 
 public enum Scenes {
     ROOT("View/layout.fxml"),
+    /* Pantalla de controladores */
     MonstruosController("View/MonstruosController.fxml"),
     FisiologiaController("View/FisiologiaController.fxml"),
     DebilidadesController("View/DebilidadesController.fxml"),
@@ -11,6 +12,8 @@ public enum Scenes {
     EquipoController("View/EquipoController.fxml"),
     AbilidadesController("View/AbilidadesController.fxml"),
     OtorgaController("View/OtorgaController.fxml"),
+    /* pantallas de mostrar */
+    Bestiario("View/Bestiario.fxml"),
     MenuAdmin("View/MenuAdmin.fxml"),
     Menu("View/Menu.fxml");
 

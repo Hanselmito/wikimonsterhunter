@@ -1,0 +1,64 @@
+/* styles/styles.css */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+.label-title {
+    -fx-text-fill: #333;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.label-subtitle {
+    -fx-text-fill: #666;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.label-description {
+    -fx-text-fill: #555;
+    -fx-font-size: 14px;
+    -fx-wrap-text: true;
+}
+
+.list-view {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* New styles for Bestiario */
+.pane-bestiario {
+    -fx-background-color: #e0f7fa;
+    -fx-padding: 15;
+    -fx-border-color: #00838f;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.label-title {
+    -fx-text-fill: #006064;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.label-description {
+    -fx-text-fill: #004d40;
+    -fx-font-size: 16px;
+    -fx-wrap-text: true;
+}
+
+.list-view {
+    -fx-background-color: #e0f2f1;
+    -fx-border-color: #004d40;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* Additional styles for aligning images to the left */
+.image-left {
+    -fx-alignment: center-left;
+    -fx-padding: 10;
+}
