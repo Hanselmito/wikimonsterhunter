@@ -1,15 +1,14 @@
+// Bestiario.java
 package com.github.Hanselmito.View;
 
+import com.github.Hanselmito.App;
 import com.github.Hanselmito.DAO.MonstruosDAO;
 import com.github.Hanselmito.Entity.Enums.Clase;
 import com.github.Hanselmito.Entity.Monstruos;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +25,8 @@ public class Bestiario extends Controller implements Initializable {
 
     @FXML
     private TabPane tabPane;
+    @FXML
+    private Button Menu;
 
     private MonstruosDAO monstruosDAO = new MonstruosDAO();
 
@@ -99,6 +100,17 @@ public class Bestiario extends Controller implements Initializable {
 
                 monsterBox.getChildren().add(monsterNameLabel);
                 monsterListView.getItems().add(monsterBox);
+
+                // Add event handler for selection
+                monsterBox.setOnMouseClicked(event -> {
+                    try {
+                        // Switch to MonstrarMonstruos screen and pass the selected monster name
+                        AppController appController = (AppController) App.currentController;
+                        appController.changeScene(Scenes.MonstrarMonstruos, monstruo.getNombre());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
 
             vBox.getChildren().addAll(titleBox, imageView, descriptionLabel, monsterListView);
@@ -107,6 +119,10 @@ public class Bestiario extends Controller implements Initializable {
         }
     }
 
+    @FXML
+    private void goBack() throws Exception {
+        App.currentController.changeScene(Scenes.Menu,null);
+    }
 
     @Override
     public void onOpen(Object input) throws Exception {
@@ -114,6 +130,5 @@ public class Bestiario extends Controller implements Initializable {
 
     @Override
     public void onClose(Object output) {
-
     }
 }
