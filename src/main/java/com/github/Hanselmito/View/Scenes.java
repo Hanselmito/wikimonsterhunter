@@ -14,6 +14,7 @@ public enum Scenes {
     OtorgaController("View/OtorgaController.fxml"),
     /* pantallas de mostrar */
     Bestiario("View/Bestiario.fxml"),
+    MonstrarMonstruos("View/MonstrarMonstruos.fxml"),
     MenuAdmin("View/MenuAdmin.fxml"),
     Menu("View/Menu.fxml");
 

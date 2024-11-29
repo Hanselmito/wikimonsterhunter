@@ -73,13 +73,13 @@ public class MenuController extends Controller implements Initializable {
             }
         });
 
-        /*MonsterMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        MonsterMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
-                App.currentController.changeScene(Scenes.Monstruos, null);
+                App.currentController.changeScene(Scenes.Bestiario, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });*/
+        });
 
         bestiario.setOnAction(event -> {
             try {

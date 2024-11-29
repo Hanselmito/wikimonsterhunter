@@ -5,6 +5,7 @@ module com.github.Hanselmito {
     requires java.sql;
     requires java.desktop;
 
+    opens com.github.Hanselmito.Entity to javafx.base;
     opens com.github.Hanselmito to javafx.fxml;
     exports com.github.Hanselmito;
     opens com.github.Hanselmito.View to javafx.fxml;
