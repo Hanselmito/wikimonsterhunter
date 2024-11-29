@@ -1,11 +1,8 @@
 package com.github.Hanselmito.DAO;
 
 import com.github.Hanselmito.Conection.SQLConection;
-import com.github.Hanselmito.Entity.Debilidades;
+import com.github.Hanselmito.Entity.*;
 import com.github.Hanselmito.Entity.Enums.*;
-import com.github.Hanselmito.Entity.Estado;
-import com.github.Hanselmito.Entity.Fisiologia;
-import com.github.Hanselmito.Entity.Monstruos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,6 +23,7 @@ public class MonstruosDAO implements DAO<Monstruos>{
     private final static String FINDBYNAME = "SELECT nombre, titulos, clase, elementos, estados, debilidad, habitats, tamano, parientes, imagen FROM monstruos WHERE nombre=?";
     private final static String FINDBYNAMEJOINF = "SELECT f.imagen, f.puntosDebiles, f.corte, f.impacto, f.disparo, f.parteRompibles FROM monstruos m JOIN fisiologia f ON m.id = f.idMonstruo WHERE m.nombre=?";
     private final static String FINDBYNAMEJOINDE = "SELECT d.elementoFuego, d.elementoAgua, d.elementoRayo, d.elementoHielo, d.elementoDraco, d.efectividadFuego, d.efectividadAgua, d.efectividadRayo, d.efectividadHielo, d.efectividadDraco, e.estadoVeneno, e.estadoSueno, e.estadoParalisis, e.estadoNitro, e.estadoAturdimiento, e.efectividadVeneno, e.efectividadSueno, e.efectividadParalisis, e.efectividadNitro, e.efectividadAturdimiento FROM monstruos m JOIN debilidades d ON m.id = d.idMonstruo JOIN estado e ON m.id = e.idMonstruo WHERE m.nombre=?";
+    private final static String FINDBYNAMEJOINM = "SELECT ma.imagen, ma.nombre, ma.dropRate, ma.mediante, ma.cantidad FROM monstruos m JOIN materiales ma ON m.id = ma.idMonstruo WHERE m.nombre=?";
 
 
     private Connection conn;
@@ -244,6 +242,27 @@ public class MonstruosDAO implements DAO<Monstruos>{
                 es.setEfectividadAturdimiento(res.getInt("efectividadAturdimiento"));
 
                 result.add(new Object[]{d, es});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Materiales> findMaterialesByMonstruoName(String nombre) {
+        List<Materiales> result = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYNAMEJOINM)) {
+            pst.setString(1, nombre);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                Materiales m = new Materiales();
+                m.setImagen(res.getBytes("imagen"));
+                m.setNombre(res.getString("nombre"));
+                m.setDropRate(res.getString("dropRate"));
+                m.setMediante(res.getString("mediante"));
+                m.setCantidad(res.getInt("cantidad"));
+                // Set other fields of Fisiologia as needed
+                result.add(m);
             }
         } catch (SQLException e) {
             e.printStackTrace();

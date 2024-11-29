@@ -69,7 +69,39 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     imageView.setFitHeight(100);
                     imageView.setFitWidth(100);
 
-                    VBox vBoxDatos = new VBox(10, nameLabel, imageView, titulosLabel, claseLabel, elementosLabel, estadosLabel, debilidadLabel, habitatsLabel, tamanoLabel, parientesLabel);
+                    // Create Labels for navigation
+                    Label label1 = new Label("Materiales");
+                    label1.setOnMouseClicked(event -> {
+                        try {
+                            AppController appController = (AppController) App.currentController;
+                            appController.changeScene(Scenes.MaterialMonstruo, monstruo.getNombre());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
+                    Label label2 = new Label("Equipo");
+                    label2.setOnMouseClicked(event -> {
+                        try {
+                            App.currentController.changeScene(Scenes.Menu, null);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
+                    Label label3 = new Label("Armas");
+                    label3.setOnMouseClicked(event -> {
+                        try {
+                            App.currentController.changeScene(Scenes.Menu, null);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
+                    HBox navigationBox = new HBox(10, label1, label2, label3);
+                    navigationBox.setAlignment(Pos.CENTER);
+
+                    VBox vBoxDatos = new VBox(10, nameLabel, imageView, titulosLabel, claseLabel, elementosLabel, estadosLabel, debilidadLabel, habitatsLabel, tamanoLabel, parientesLabel, navigationBox);
                     vBoxDatos.getStyleClass().add("datos-vbox");
                     vBox.getChildren().add(vBoxDatos);
                 }
