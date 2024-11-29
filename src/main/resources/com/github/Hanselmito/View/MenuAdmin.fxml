@@ -42,7 +42,7 @@
          </image></ImageView>
       <Label fx:id="MSC" layoutX="50.0" layoutY="150.0" prefHeight="17.0" prefWidth="100.0" text="1" />
       <Label fx:id="FSC" layoutX="200.0" layoutY="150.0" prefHeight="17.0" prefWidth="100.0" text="2" />
-      <Button fx:id="Back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back Menu" />
+      <Button fx:id="Back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back Menu" AnchorPane.leftAnchor="14.0" />
       <Label fx:id="DSC" layoutX="350.0" layoutY="150.0" prefHeight="17.0" prefWidth="100.0" text="3" />
       <Label fx:id="ESC" layoutX="475.0" layoutY="150.0" prefHeight="17.0" prefWidth="100.0" text="4" />
       <Label fx:id="MASC" layoutX="39.0" layoutY="300.0" prefHeight="17.0" prefWidth="100.0" text="5" />

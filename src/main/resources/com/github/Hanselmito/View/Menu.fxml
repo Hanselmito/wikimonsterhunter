@@ -21,9 +21,9 @@
                      </image>
                   </ImageView>
                         <Label fx:id="TituloDelMenu" layoutX="129.0" layoutY="14.0" prefHeight="25.0" prefWidth="135.0" text="Label" />
-                        <SplitMenuButton layoutX="14.0" layoutY="52.0" mnemonicParsing="false" text="SplitMenuButton">
+                        <SplitMenuButton fx:id="MonsterMenu" layoutX="14.0" layoutY="52.0" mnemonicParsing="false" text="Monstruos">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
+                                <MenuItem fx:id="bestiario" mnemonicParsing="false" text="Bestiario" />
                                 <MenuItem mnemonicParsing="false" text="Action 2" />
                             </items>
                         </SplitMenuButton>

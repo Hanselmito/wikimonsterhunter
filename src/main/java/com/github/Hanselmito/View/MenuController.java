@@ -4,7 +4,9 @@ import com.github.Hanselmito.App;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -24,6 +26,10 @@ public class MenuController extends Controller implements Initializable {
     private Pane MenuPane;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private SplitMenuButton MonsterMenu;
+    @FXML
+    private MenuItem bestiario;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,6 +68,22 @@ public class MenuController extends Controller implements Initializable {
         Edit.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
                 App.currentController.changeScene(Scenes.MenuAdmin, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        /*MonsterMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                App.currentController.changeScene(Scenes.Monstruos, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });*/
+
+        bestiario.setOnAction(event -> {
+            try {
+                App.currentController.changeScene(Scenes.Bestiario, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }

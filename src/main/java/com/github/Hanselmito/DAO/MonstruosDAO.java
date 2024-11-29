@@ -20,7 +20,8 @@ public class MonstruosDAO implements DAO<Monstruos>{
     private final static String DELETE = "DELETE FROM monstruos WHERE id=?";
     private final static String FINDALL = "SELECT * FROM monstruos";
     private final static String FINDBYID = "SELECT * FROM monstruos WHERE id=?";
-    private final static String FINDBYCLASE = "SELECT * FROM monstruos WHERE clase=?";
+    private final static String FINDBYCLASE = "SELECT nombre FROM monstruos WHERE clase=?";
+    private final static String FINDBYNAME = "SELECT * FROM monstruos WHERE nombre=?";
 
     private Connection conn;
     public MonstruosDAO(){
@@ -115,6 +116,22 @@ public class MonstruosDAO implements DAO<Monstruos>{
     public List<Monstruos> findByClase(String key){
         List<Monstruos> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYCLASE)){
+            pst.setString(1, key);
+            ResultSet res = pst.executeQuery();
+            while (res.next()){
+                Monstruos m = new Monstruos();
+                m.setNombre(res.getString("nombre"));
+                result.add(m);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Monstruos> findByName(String key){
+        List<Monstruos> result = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYNAME)){
             pst.setString(1, key);
             ResultSet res = pst.executeQuery();
             while (res.next()){
