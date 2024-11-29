@@ -15,6 +15,7 @@ public enum Scenes {
     /* pantallas de mostrar */
     Bestiario("View/Bestiario.fxml"),
     MonstrarMonstruos("View/MonstrarMonstruos.fxml"),
+    MaterialMonstruo("View/MaterialesMonstruo.fxml"),
     MenuAdmin("View/MenuAdmin.fxml"),
     Menu("View/Menu.fxml");
 
