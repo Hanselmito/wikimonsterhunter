@@ -1,3 +1,4 @@
+// src/main/java/com/github/Hanselmito/App.java
 package com.github.Hanselmito;
 
 import com.github.Hanselmito.View.*;
@@ -14,7 +15,6 @@ public class App extends Application {
     public static Stage stage;
     public static AppController currentController;
 
-
     public static void main(String[] args) {
         launch();
     }
@@ -22,11 +22,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         View view = AppController.loadFXML(Scenes.ROOT);
-        scene = new Scene(view.scene,  652, 403);
+        scene = new Scene(view.scene,  615, 500);
         currentController = (AppController) view.controller;
         currentController.onOpen( null);
         stage.setScene(scene);
+        stage.setMinWidth(615);
         stage.show();
-
     }
 }
