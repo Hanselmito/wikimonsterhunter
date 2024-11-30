@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MonstruosDAO implements DAO<Monstruos>{
@@ -18,13 +19,12 @@ public class MonstruosDAO implements DAO<Monstruos>{
     private final static String FINDALL = "SELECT * FROM monstruos";
     private final static String FINDBYID = "SELECT * FROM monstruos WHERE id=?";
     private final static String FINDBYCLASE = "SELECT nombre FROM monstruos WHERE clase=?";
-    private final static String FINDBYELEMENTOS = "SELECT nombre FROM monstruos WHERE elementos=?";
-    private final static String FINDBYDEBILIDAD = "SELECT nombre FROM monstruos WHERE debilidad=?";
     private final static String FINDBYNAME = "SELECT nombre, titulos, clase, elementos, estados, debilidad, habitats, tamano, parientes, imagen FROM monstruos WHERE nombre=?";
     private final static String FINDBYNAMEJOINF = "SELECT f.imagen, f.puntosDebiles, f.corte, f.impacto, f.disparo, f.parteRompibles FROM monstruos m JOIN fisiologia f ON m.id = f.idMonstruo WHERE m.nombre=?";
     private final static String FINDBYNAMEJOINDE = "SELECT d.elementoFuego, d.elementoAgua, d.elementoRayo, d.elementoHielo, d.elementoDraco, d.efectividadFuego, d.efectividadAgua, d.efectividadRayo, d.efectividadHielo, d.efectividadDraco, e.estadoVeneno, e.estadoSueno, e.estadoParalisis, e.estadoNitro, e.estadoAturdimiento, e.efectividadVeneno, e.efectividadSueno, e.efectividadParalisis, e.efectividadNitro, e.efectividadAturdimiento FROM monstruos m JOIN debilidades d ON m.id = d.idMonstruo JOIN estado e ON m.id = e.idMonstruo WHERE m.nombre=?";
     private final static String FINDBYNAMEJOINM = "SELECT ma.imagen, ma.nombre, ma.dropRate, ma.mediante, ma.cantidad FROM monstruos m JOIN materiales ma ON m.id = ma.idMonstruo WHERE m.nombre=?";
-
+    private final static String FINDBYARMASJOIN = "SELECT a.imagen, a.nombre FROM armas a JOIN materiales ma ON a.idMateriales = ma.id JOIN monstruos mo ON ma.idMonstruo = mo.id WHERE mo.nombre = ?";
+    private final static String FINDBYEQUIPOJOIN = "SELECT e.imagen, e.nombre, a.nombre AS habilidad FROM equipo e JOIN otorga o ON e.id = o.idEquipo JOIN abilidades a ON o.idAbilidades = a.id JOIN materiales ma ON e.idMateriales = ma.id JOIN monstruos mo ON ma.idMonstruo = mo.id WHERE mo.nombre = ?";
 
     private Connection conn;
     public MonstruosDAO(){
@@ -119,38 +119,6 @@ public class MonstruosDAO implements DAO<Monstruos>{
     public List<Monstruos> findByClase(String key){
         List<Monstruos> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYCLASE)){
-            pst.setString(1, key);
-            ResultSet res = pst.executeQuery();
-            while (res.next()){
-                Monstruos m = new Monstruos();
-                m.setNombre(res.getString("nombre"));
-                result.add(m);
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public List<Monstruos> findByElementos(String key){
-        List<Monstruos> result = new ArrayList<>();
-        try (PreparedStatement pst = conn.prepareStatement(FINDBYELEMENTOS)){
-            pst.setString(1, key);
-            ResultSet res = pst.executeQuery();
-            while (res.next()){
-                Monstruos m = new Monstruos();
-                m.setNombre(res.getString("nombre"));
-                result.add(m);
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public List<Monstruos> findByDebilidad(String key){
-        List<Monstruos> result = new ArrayList<>();
-        try (PreparedStatement pst = conn.prepareStatement(FINDBYDEBILIDAD)){
             pst.setString(1, key);
             ResultSet res = pst.executeQuery();
             while (res.next()){
@@ -268,6 +236,47 @@ public class MonstruosDAO implements DAO<Monstruos>{
             e.printStackTrace();
         }
         return result;
+    }
+
+    public List<Armas> findArmasByMonstruoName(String monsterName) {
+        List<Armas> armasList = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYARMASJOIN)) {
+            pst.setString(1, monsterName);
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Armas arma = new Armas();
+                    arma.setImagen(rs.getBytes("imagen"));
+                    arma.setNombre(rs.getString("nombre"));
+                    armasList.add(arma);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return armasList;
+    }
+
+    public List<Equipo> findEquipoByMonstruoName(String monsterName) {
+        List<Equipo> equipoList = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYEQUIPOJOIN)) {
+            pst.setString(1, monsterName);
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Equipo equipo = new Equipo();
+                    equipo.setImagen(rs.getBytes("imagen"));
+                    equipo.setNombre(rs.getString("nombre"));
+
+                    Abilidades habilidad = new Abilidades();
+                    habilidad.setNombre(rs.getString("habilidad"));
+
+                    equipo.setList_Abilidades(Arrays.asList(habilidad));
+                    equipoList.add(equipo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return equipoList;
     }
 
     @Override

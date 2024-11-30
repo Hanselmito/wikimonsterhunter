@@ -73,7 +73,7 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     Label label1 = new Label("Materiales");
                     label1.setOnMouseClicked(event -> {
                         try {
-                            AppController appController = (AppController) App.currentController;
+                            AppController appController = App.currentController;
                             appController.changeScene(Scenes.MaterialMonstruo, monstruo.getNombre());
                         } catch (Exception e) {
                             throw new RuntimeException(e);
@@ -83,7 +83,8 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     Label label2 = new Label("Equipo");
                     label2.setOnMouseClicked(event -> {
                         try {
-                            App.currentController.changeScene(Scenes.Menu, null);
+                            AppController appController = App.currentController;
+                            appController.changeScene(Scenes.EquipoMonstruo, monstruo.getNombre());
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
@@ -92,7 +93,8 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     Label label3 = new Label("Armas");
                     label3.setOnMouseClicked(event -> {
                         try {
-                            App.currentController.changeScene(Scenes.Menu, null);
+                            AppController appController = App.currentController;
+                            appController.changeScene(Scenes.ArmasMonstruo, monstruo.getNombre());
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
