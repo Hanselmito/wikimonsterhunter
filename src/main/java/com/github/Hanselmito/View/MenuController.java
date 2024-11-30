@@ -13,6 +13,9 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MenuController extends Controller implements Initializable {
@@ -30,10 +33,21 @@ public class MenuController extends Controller implements Initializable {
     private SplitMenuButton MonsterMenu;
     @FXML
     private MenuItem bestiario;
+    @FXML
+    private Label Texto;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TituloDelMenu.setText("Wiki Monster Hunter");
+        LocalDate currentDate = LocalDate.now();
+        String dayOfWeek = currentDate.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        String day = String.valueOf(currentDate.getDayOfMonth());
+        String month = currentDate.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        String year = String.valueOf(currentDate.getYear());
+
+        String labelText = "Este wiki está editado por fans y para fans,\n ¡y las contribuciones son siempre bienvenidas!\n Aquí puedes encontrar toda la información acerca de\n la saga favorita Monster Hunter, y si no existe.\n ¡siempre puedes crearla!\n\nEstamos a " + dayOfWeek + ", " + day + " de " + month + " de " + year + " .\n\n¡Disfruta de tu estancia!";
+        Texto.setText(labelText);
+
         scrollPane.addEventFilter(ScrollEvent.SCROLL, event -> {
             if (event.isControlDown()) {
                 double zoomFactor = 1.05;

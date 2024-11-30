@@ -9,38 +9,48 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.MenuController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../Styles/MenuStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.MenuController">
     <children>
         <ScrollPane fx:id="scrollPane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <Pane fx:id="MenuPane" prefHeight="1000.0" prefWidth="600.0">
+                <Pane fx:id="MenuPane" prefHeight="1000.0" prefWidth="600.0" styleClass="menu-pane">
                     <children>
-                        <ImageView fx:id="ImageMenu" fitHeight="42.0" fitWidth="104.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="ImageMenu" fitHeight="42.0" fitWidth="104.0" layoutX="14.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../Icons/Site-logo.jpg" />
                      </image>
                   </ImageView>
-                        <Label fx:id="TituloDelMenu" layoutX="129.0" layoutY="14.0" prefHeight="25.0" prefWidth="135.0" text="Label" />
-                        <SplitMenuButton fx:id="MonsterMenu" layoutX="14.0" layoutY="52.0" mnemonicParsing="false" text="Monstruos">
+                        <Label fx:id="TituloDelMenu" layoutX="133.0" layoutY="45.0" prefHeight="35.0" prefWidth="344.0" text="Label" />
+                        <SplitMenuButton fx:id="MonsterMenu" layoutX="15.0" layoutY="83.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="205.0" text="Monstruos">
                             <items>
                                 <MenuItem fx:id="bestiario" mnemonicParsing="false" text="Bestiario" />
                                 <MenuItem mnemonicParsing="false" text="Action 2" />
                             </items>
                         </SplitMenuButton>
-                        <SplitMenuButton layoutX="162.0" layoutY="52.0" mnemonicParsing="false" text="SplitMenuButton">
+                        <SplitMenuButton layoutX="228.0" layoutY="83.0" mnemonicParsing="false" text="SplitMenuButton">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Action 1" />
                                 <MenuItem mnemonicParsing="false" text="Action 2" />
                             </items>
                         </SplitMenuButton>
-                  <ImageView fx:id="Edit" fitHeight="40.0" fitWidth="21.0" layoutX="273.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Icons/1159633.png" />
-                     </image>
-                  </ImageView>
+                  <Pane layoutX="53.0" layoutY="253.0" prefHeight="240.0" prefWidth="488.0" styleClass="texto-pane">
+                     <children>
+                        <ImageView fitHeight="47.0" fitWidth="343.0" layoutX="166.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../Icons/imagen_2024-11-30_183444815.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="Texto" layoutX="51.0" layoutY="74.0" prefHeight="148.0" prefWidth="416.0" text="Label1" />
+                     </children>
+                  </Pane>
                     </children>
                 </Pane>
             </content>
         </ScrollPane>
+      <ImageView fx:id="Edit" fitHeight="40.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true" translateX="560.0" translateY="5.0" AnchorPane.rightAnchor="579.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../../Icons/1159633.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
