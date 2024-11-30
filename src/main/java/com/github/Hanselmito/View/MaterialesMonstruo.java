@@ -1,5 +1,6 @@
 package com.github.Hanselmito.View;
 
+import com.github.Hanselmito.App;
 import com.github.Hanselmito.DAO.MonstruosDAO;
 import com.github.Hanselmito.Entity.Materiales;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,6 +22,12 @@ public class MaterialesMonstruo extends Controller implements Initializable {
 
     @FXML
     private Label sobreLabel;
+    @FXML
+    private Label Generarl;
+    @FXML
+    private Label Equipo;
+    @FXML
+    private Label Armas;
 
     @FXML
     private TableView<Materiales> materialesTableView;
@@ -53,8 +60,8 @@ public class MaterialesMonstruo extends Controller implements Initializable {
                 Image image = new Image(bis);
 
                 imageView = new ImageView(image);
-                imageView.setFitWidth(10);
-                imageView.setFitHeight(10);
+                imageView.setFitWidth(30);
+                imageView.setFitHeight(30);
                 return new SimpleObjectProperty<>(imageView);
             } else {
                 return null;
@@ -78,6 +85,19 @@ public class MaterialesMonstruo extends Controller implements Initializable {
         List<Materiales> materialesList = monstruosDAO.findMaterialesByMonstruoName(monsterName);
         materialesTableView.getItems().setAll(materialesList);
         sobreLabel.setText("Sobre " + monsterName + ":");
+    }
+
+    @FXML
+    private void goBack() throws Exception {
+        App.currentController.changeScene(Scenes.MonstrarMonstruos, monsterName);
+    }
+    @FXML
+    private void goEquipo() throws Exception {
+        App.currentController.changeScene(Scenes.EquipoMonstruo, monsterName);
+    }
+    @FXML
+    private void goArmas() throws Exception {
+        App.currentController.changeScene(Scenes.ArmasMonstruo, monsterName);
     }
 
     @Override

@@ -15,9 +15,9 @@
                         <Label fx:id="sobreLabel" layoutX="8.0" layoutY="5.0" prefHeight="17.0" prefWidth="183.0" text="Sobre a:" />
                     </children>
                 </Pane>
-                <Label layoutY="42.0" prefHeight="17.0" prefWidth="100.0" text="General" />
-                <Label layoutX="100.0" layoutY="42.0" prefHeight="17.0" prefWidth="100.0" text="Equipo" />
-                <Label layoutX="200.0" layoutY="42.0" prefHeight="17.0" prefWidth="100.0" text="Armas" />
+                <Label fx:id="Generarl" layoutY="42.0" onMouseClicked="#goBack" prefHeight="17.0" prefWidth="100.0" text="General" />
+                <Label fx:id="Equipo" layoutX="100.0" layoutY="42.0" onMouseClicked="#goEquipo" prefHeight="17.0" prefWidth="100.0" text="Equipo" />
+                <Label fx:id="Armas" layoutX="200.0" layoutY="42.0" onMouseClicked="#goArmas" prefHeight="17.0" prefWidth="100.0" text="Armas" />
                 <Label layoutX="100.0" layoutY="65.0" prefHeight="17.0" prefWidth="100.0" text="Materiales" />
             </children>
         </Pane>

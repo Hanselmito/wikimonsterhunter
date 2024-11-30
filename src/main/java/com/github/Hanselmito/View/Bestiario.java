@@ -66,7 +66,7 @@ public class Bestiario extends Controller implements Initializable {
             Label classNameLabel = new Label(clase.getPartOfClase());
             classNameLabel.getStyleClass().add("label-title");
             HBox titleBox = new HBox(classNameLabel);
-            titleBox.setAlignment(Pos.CENTER_RIGHT); // Align title to the right
+            titleBox.setAlignment(Pos.CENTER); // Align title to the right
 
             // Image
             ImageView imageView = new ImageView();

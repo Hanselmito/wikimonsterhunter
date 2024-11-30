@@ -1,0 +1,40 @@
+/* styles.css */
+.tab-pane {
+    -fx-background-color: #f0f0f0;
+}
+
+.tab {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.vbox {
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+.armas-vbox {
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-background-color: #fff;
+}
+
+.image-view {
+    -fx-fit-width: 100px;
+    -fx-fit-height: 100px;
+}
+
+.label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #333;
+}
+
+.button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #fff;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+}
