@@ -1,0 +1,49 @@
+/* src/main/resources/Styles/MenuStyles.css */
+.scroll-pane {
+    -fx-background-color: #f8f9fa; /* Light pastel color */
+}
+
+.menu-pane {
+    -fx-background-color: #ffebd5; /* Light pastel color */
+    -fx-padding: 20px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0, 0);
+}
+
+.split-menu-button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 7px; /* Smaller font size */
+    -fx-padding: 3px; /* Smaller padding */
+    -fx-background-radius: 10px;
+}
+
+.split-menu-button:hover {
+    -fx-background-color: #0056b3;
+}
+
+.menu-item {
+    -fx-font-size: 14px;
+}
+
+.texto-pane {
+    -fx-background-color: #ffebd5; /* Light pastel color */
+    -fx-padding: 20px;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 0 10px 0 0;
+    -fx-background-radius: 0 10px 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0, 0);
+}
