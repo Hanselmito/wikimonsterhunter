@@ -3,6 +3,7 @@ package com.github.Hanselmito.View;
 
 import com.github.Hanselmito.App;
 import com.github.Hanselmito.DAO.MonstruosDAO;
+import com.github.Hanselmito.Entity.Abilidades;
 import com.github.Hanselmito.Entity.Equipo;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,10 +59,16 @@ public class EquipoMonstruo extends Controller implements Initializable {
             Label nameLabel = new Label("Nombre: " + equipo.getNombre());
             nameLabel.getStyleClass().add("label");
 
-            Label habilidadLabel = new Label("Habilidad: " + equipo.getList_Abilidades().get(0).getNombre());
-            habilidadLabel.getStyleClass().add("label");
+            vBox.getChildren().addAll(imageView, nameLabel);
 
-            vBox.getChildren().addAll(imageView, nameLabel, habilidadLabel);
+            // Retrieve and display all abilities associated with the equipment
+            List<Abilidades> habilidadesList = equipo.getList_Abilidades();
+            for (Abilidades habilidad : habilidadesList) {
+                Label habilidadLabel = new Label("Habilidad: " + habilidad.getNombre());
+                habilidadLabel.getStyleClass().add("label");
+                vBox.getChildren().add(habilidadLabel);
+            }
+
             anchorPane.getChildren().add(vBox);
             tab.setContent(anchorPane);
             tabPane.getTabs().add(tab);
