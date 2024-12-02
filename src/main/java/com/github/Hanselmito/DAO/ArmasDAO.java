@@ -12,7 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArmasDAO implements DAO<Armas>{
+public class ArmasDAO implements DAO<Armas> {
+    // Consultas SQL para las operaciones CRUD
     private final static String INSERT = "INSERT INTO armas (imagen, nombre, ataque, atributo, afilado, afinidad, defensa, ranuras, materiales, idMateriales) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE armas SET imagen=?, nombre=?, ataque=?, atributo=?, afilado=?, afinidad=?, defensa=?, ranuras=?, materiales=?, idMateriales=? WHERE id=?";
     private final static String DELETE = "DELETE FROM armas WHERE id=?";
@@ -20,16 +21,19 @@ public class ArmasDAO implements DAO<Armas>{
     private final static String FINDBYID = "SELECT * FROM armas WHERE id=?";
 
     private Connection conn;
-    public ArmasDAO(){
+
+    // Constructor que inicializa la conexión a la base de datos
+    public ArmasDAO() {
         conn = SQLConection.getConnection();
     }
 
+    // Método para guardar una nueva arma en la base de datos
     @Override
     public Armas save(Armas entity) {
         Armas result = entity;
-        if (entity==null || entity.getId_materiales().getId()==0) return result;
+        if (entity == null || entity.getId_materiales().getId() == 0) return result;
         Armas a = findById(entity.getId_materiales().getId());
-        if(a!=null) {
+        if (a != null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT)) {
                 pst.setBytes(1, entity.getImagen());
                 pst.setString(2, entity.getNombre());
@@ -42,19 +46,20 @@ public class ArmasDAO implements DAO<Armas>{
                 pst.setString(9, entity.getMateriales());
                 pst.setInt(10, entity.getId_materiales().getId());
                 pst.executeUpdate();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return result;
     }
 
+    // Método para actualizar una arma existente en la base de datos
     @Override
     public Armas update(Armas entity) {
         Armas result = entity;
-        if (entity==null || entity.getId_materiales().getId()==0) return result;
+        if (entity == null || entity.getId_materiales().getId() == 0) return result;
         Armas a = findById(entity.getId_materiales().getId());
-        if(a!=null) {
+        if (a != null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(UPDATE)) {
                 pst.setBytes(1, entity.getImagen());
                 pst.setString(2, entity.getNombre());
@@ -68,29 +73,31 @@ public class ArmasDAO implements DAO<Armas>{
                 pst.setInt(10, entity.getId_materiales().getId());
                 pst.setInt(11, entity.getId());
                 pst.executeUpdate();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return result;
     }
 
+    // Método para eliminar una arma de la base de datos
     @Override
     public Armas delete(Armas entity) throws SQLException {
-        if(entity == null || entity.getId()==0) return entity;
-        try (PreparedStatement pst = conn.prepareStatement(DELETE)){
-            pst.setInt(1,entity.getId());
+        if (entity == null || entity.getId() == 0) return entity;
+        try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
+            pst.setInt(1, entity.getId());
             pst.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return entity;
     }
 
+    // Método para encontrar una arma por su ID
     @Override
     public Armas findById(int key) {
         Armas result = new Armas();
-        try(PreparedStatement pst = conn.prepareStatement(FINDBYID)) {
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYID)) {
             pst.setString(1, String.valueOf(key));
             try (ResultSet res = pst.executeQuery()) {
                 if (res.next()) {
@@ -104,17 +111,17 @@ public class ArmasDAO implements DAO<Armas>{
                     result.setDefensa(res.getInt("defensa"));
                     result.setRanuras(res.getInt("ranuras"));
                     result.setMateriales(res.getString("materiales"));
-                    MaterialesDAO m = new MaterialesDAO();
-                    result.setId_materiales(m.findById(res.getInt("idMateriales")));
+                    result.setId_materiales(new MaterialesDAO().findById(res.getInt("idMateriales")));
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    public List<Armas> findALL() {
+    // Método para encontrar todas las armas
+    public List<Armas> findAll() {
         List<Armas> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDALL)) {
             ResultSet res = pst.executeQuery();
@@ -133,14 +140,14 @@ public class ArmasDAO implements DAO<Armas>{
                 a.setId_materiales(new MaterialesDAO().findById(res.getInt("idMateriales")));
                 result.add(a);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para cerrar la conexión (actualmente vacío)
     @Override
     public void close() throws IOException {
-
     }
 }

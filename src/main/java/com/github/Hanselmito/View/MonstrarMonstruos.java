@@ -1,3 +1,4 @@
+// MonstrarMonstruos.java
 package com.github.Hanselmito.View;
 
 import com.github.Hanselmito.App;
@@ -24,26 +25,28 @@ import java.util.ResourceBundle;
 public class MonstrarMonstruos extends Controller implements Initializable {
 
     @FXML
-    private TabPane tabPane;
+    private TabPane tabPane; // Pestañas de la interfaz
     @FXML
-    private Button BackButton;
+    private Button BackButton; // Botón para regresar
 
-    private MonstruosDAO monstruosDAO = new MonstruosDAO();
-    private String monsterName;
+    private MonstruosDAO monstruosDAO = new MonstruosDAO(); // DAO para acceder a los datos de los monstruos
+    private String monsterName; // Nombre del monstruo a mostrar
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Initialize tabs only if monsterName is set
+        // Inicializar las pestañas solo si el nombre del monstruo está establecido
         if (monsterName != null) {
             initializeTabs();
         }
     }
 
+    // Establecer el nombre del monstruo y inicializar las pestañas
     public void setMonsterName(String monsterName) {
         this.monsterName = monsterName;
         initializeTabs();
     }
 
+    // Inicializar las pestañas con la información del monstruo
     private void initializeTabs() {
         for (Tab tab : tabPane.getTabs()) {
             String tabText = tab.getText();
@@ -52,6 +55,7 @@ public class MonstrarMonstruos extends Controller implements Initializable {
             vBox.setAlignment(Pos.CENTER);
 
             if (tabText.equals("Datos")) {
+                // Pestaña de datos generales del monstruo
                 List<Monstruos> monstruosList = monstruosDAO.findByName(monsterName);
                 for (Monstruos monstruo : monstruosList) {
                     Label nameLabel = new Label("Nombre: " + monstruo.getNombre());
@@ -69,7 +73,7 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     imageView.setFitHeight(100);
                     imageView.setFitWidth(100);
 
-                    // Create Labels for navigation
+                    // Crear etiquetas para la navegación
                     Label label1 = new Label("Materiales");
                     label1.setOnMouseClicked(event -> {
                         try {
@@ -108,6 +112,7 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     vBox.getChildren().add(vBoxDatos);
                 }
             } else if (tabText.equals("Fisiologia")) {
+                // Pestaña de fisiología del monstruo
                 List<Fisiologia> fisiologiaList = monstruosDAO.findFisiologiaByMonstruoName(monsterName);
                 for (Fisiologia fisiologia : fisiologiaList) {
                     ImageView imageView = new ImageView();
@@ -130,6 +135,7 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     vBox.getChildren().add(vBoxFisiologia);
                 }
             } else if (tabText.equals("Debilidades y Estados")) {
+                // Pestaña de debilidades y estados del monstruo
                 Label debilidadesTitleLabel = new Label("Debilidades");
                 vBox.getChildren().add(debilidadesTitleLabel);
 
@@ -153,14 +159,14 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     Debilidades debilidad = (Debilidades) debilidadesYEstados[0];
                     Estado estado = (Estado) debilidadesYEstados[1];
 
-                    // Add elements and their values
+                    // Agregar elementos y sus valores
                     addElementWithValue(elementosVBox, elementosValuesVBox, "Fuego", debilidad.getEfectividadFuego());
                     addElementWithValue(elementosVBox, elementosValuesVBox, "Agua", debilidad.getEfectividadAgua());
                     addElementWithValue(elementosVBox, elementosValuesVBox, "Rayo", debilidad.getEfectividadRayo());
                     addElementWithValue(elementosVBox, elementosValuesVBox, "Hielo", debilidad.getEfectividadHielo());
                     addElementWithValue(elementosVBox, elementosValuesVBox, "Draco", debilidad.getEfectividadDraco());
 
-                    // Add states and their values
+                    // Agregar estados y sus valores
                     addStateWithValue(estadosVBox, estadosValuesVBox, "Veneno", estado.getEfectividadVeneno());
                     addStateWithValue(estadosVBox, estadosValuesVBox, "Sueño", estado.getEfectividadSueno());
                     addStateWithValue(estadosVBox, estadosValuesVBox, "Parálisis", estado.getEfectividadParalisis());
@@ -177,6 +183,7 @@ public class MonstrarMonstruos extends Controller implements Initializable {
         }
     }
 
+    // Agregar un elemento y su valor a los VBox correspondientes
     private void addElementWithValue(VBox elementsVBox, VBox valuesVBox, String element, int value) {
         Label elementLabel = new Label(element);
         elementsVBox.getChildren().add(elementLabel);
@@ -185,6 +192,7 @@ public class MonstrarMonstruos extends Controller implements Initializable {
         valuesVBox.getChildren().add(valueLabel);
     }
 
+    // Agregar un estado y su valor a los VBox correspondientes
     private void addStateWithValue(VBox statesVBox, VBox valuesVBox, String state, int value) {
         Label stateLabel = new Label(state);
         statesVBox.getChildren().add(stateLabel);
@@ -195,6 +203,7 @@ public class MonstrarMonstruos extends Controller implements Initializable {
 
     @Override
     public void onOpen(Object input) throws Exception {
+        // Establecer el nombre del monstruo si el input es una cadena
         if (input instanceof String) {
             setMonsterName((String) input);
         }
@@ -202,10 +211,12 @@ public class MonstrarMonstruos extends Controller implements Initializable {
 
     @FXML
     private void goBack() throws Exception {
-        App.currentController.changeScene(Scenes.Bestiario,null);
+        // Cambiar a la escena del Bestiario
+        App.currentController.changeScene(Scenes.Bestiario, null);
     }
 
     @Override
     public void onClose(Object output) {
+        // Método vacío para manejar el cierre de la vista
     }
 }

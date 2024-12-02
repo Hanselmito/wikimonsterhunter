@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AbilidadesController extends Controller implements Initializable {
+public class HabilidadesController extends Controller implements Initializable {
     @FXML
     private AnchorPane anchorPane;
     @FXML

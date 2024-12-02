@@ -132,13 +132,20 @@ public class MonstruosController extends Controller implements Initializable {
         // Retrieve data from form fields
         String nombreText = nombre.getText();
         String titulosText = titulos.getText();
-        String habitatsText = habitats.getText();
-        String tamanoText = tamano.getText();
-        String parientesText = parientes.getText();
         Clase claseValue = clase.getValue();
         Elementos elementosValue = elementos.getValue();
         Estados estadosValue = estados.getValue();
         Debilidad debilidadValue = debilidad.getValue();
+        String habitatsText = habitats.getText();
+        String tamanoText = tamano.getText();
+        String parientesText = parientes.getText();
+
+        // Check if the name already exists
+        List<String> existingNames = moDAO.findAllNames();
+        if (existingNames.contains(nombreText)) {
+            showAlert("El nombre del monstruo ya existe. Por favor, elija otro nombre.");
+            return;
+        }
 
         // Convert image to byte array
         byte[] imageData = new byte[(int) imageFile.length()];

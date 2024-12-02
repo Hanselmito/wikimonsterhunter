@@ -17,28 +17,32 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+// Clase ArmasMonstruo que extiende de Controller e implementa Initializable
 public class ArmasMonstruo extends Controller implements Initializable {
 
     @FXML
-    private TabPane tabPane;
+    private TabPane tabPane; // Pestañas de la interfaz
     @FXML
-    private Button BackButton;
+    private Button BackButton; // Botón para regresar
 
-    private MonstruosDAO monstruosDAO = new MonstruosDAO();
-    private String monsterName;
+    private MonstruosDAO monstruosDAO = new MonstruosDAO(); // DAO para acceder a los datos de los monstruos
+    private String monsterName; // Nombre del monstruo
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Inicializar las pestañas solo si el nombre del monstruo está establecido
         if (monsterName != null) {
             initializeTabs();
         }
     }
 
+    // Establecer el nombre del monstruo y inicializar las pestañas
     public void setMonsterName(String monsterName) {
         this.monsterName = monsterName;
         initializeTabs();
     }
 
+    // Inicializar las pestañas con la información de las armas del monstruo
     private void initializeTabs() {
         List<Armas> armasList = monstruosDAO.findArmasByMonstruoName(monsterName);
         for (Armas arma : armasList) {
@@ -64,6 +68,7 @@ public class ArmasMonstruo extends Controller implements Initializable {
 
     @Override
     public void onOpen(Object input) throws Exception {
+        // Establecer el nombre del monstruo si el input es una cadena
         if (input instanceof String) {
             setMonsterName((String) input);
         }
@@ -71,10 +76,12 @@ public class ArmasMonstruo extends Controller implements Initializable {
 
     @FXML
     private void goBack() throws Exception {
+        // Cambiar a la escena de mostrar monstruos
         App.currentController.changeScene(Scenes.MonstrarMonstruos, monsterName);
     }
 
     @Override
     public void onClose(Object output) {
+        // Método vacío para manejar el cierre de la vista
     }
 }

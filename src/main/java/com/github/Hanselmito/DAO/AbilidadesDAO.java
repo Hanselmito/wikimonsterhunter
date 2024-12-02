@@ -11,19 +11,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbilidadesDAO implements DAO<Abilidades>{
+public class AbilidadesDAO implements DAO<Abilidades> {
+    // Consultas SQL para las operaciones CRUD
     private static final String INSERT = "INSERT INTO abilidades (imagen, nombre, nivel, descripcion, equip) VALUES (?, ?, ?, ?, ?)";
     private static final String UPDATE = "UPDATE abilidades SET imagen=?, nombre=?, nivel=?, descripcion=?, equip=? WHERE id=?";
     private static final String DELETE = "DELETE FROM abilidades WHERE id=?";
     private static final String FINDALL = "SELECT * FROM abilidades";
     private static final String FINDBYID = "SELECT * FROM abilidades WHERE id=?";
 
-
     private Connection conn;
-    public AbilidadesDAO(){
+
+    // Constructor que inicializa la conexión a la base de datos
+    public AbilidadesDAO() {
         conn = SQLConection.getConnection();
     }
 
+    // Método para guardar una nueva habilidad en la base de datos
     @Override
     public Abilidades save(Abilidades entity) {
         if (entity == null) {
@@ -53,11 +56,12 @@ public class AbilidadesDAO implements DAO<Abilidades>{
         return entity;
     }
 
+    // Método para actualizar una habilidad existente en la base de datos
     @Override
     public Abilidades update(Abilidades entity) {
         Abilidades result = entity;
-        if (entity==null || entity.getId()==0) return result;
-        try(PreparedStatement pst = SQLConection.getConnection().prepareStatement(UPDATE)){
+        if (entity == null || entity.getId() == 0) return result;
+        try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(UPDATE)) {
             pst.setBytes(1, entity.getImagen());
             pst.setString(2, entity.getNombre());
             pst.setInt(3, entity.getNivel());
@@ -65,31 +69,33 @@ public class AbilidadesDAO implements DAO<Abilidades>{
             pst.setString(5, entity.getEquip());
             pst.setInt(6, entity.getId());
             pst.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para eliminar una habilidad de la base de datos
     @Override
     public Abilidades delete(Abilidades entity) throws SQLException {
-        if(entity == null || entity.getId()==0) return entity;
-        try (PreparedStatement pst = conn.prepareStatement(DELETE)){
-            pst.setInt(1,entity.getId());
+        if (entity == null || entity.getId() == 0) return entity;
+        try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
+            pst.setInt(1, entity.getId());
             pst.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return entity;
     }
 
+    // Método para encontrar una habilidad por su ID
     @Override
     public Abilidades findById(int key) {
         Abilidades result = new Abilidades();
-        try(PreparedStatement pst = conn.prepareStatement(FINDBYID)){
-            pst.setString(1, String.valueOf(key));
-            try(ResultSet res = pst.executeQuery()){
-                if(res.next()){
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYID)) {
+            pst.setInt(1, key);
+            try (ResultSet res = pst.executeQuery()) {
+                if (res.next()) {
                     result.setId(res.getInt("id"));
                     result.setImagen(res.getBytes("imagen"));
                     result.setNombre(res.getString("nombre"));
@@ -98,12 +104,13 @@ public class AbilidadesDAO implements DAO<Abilidades>{
                     result.setEquip(res.getString("equip"));
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para encontrar todas las habilidades
     public List<Abilidades> findAll() {
         List<Abilidades> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDALL)) {
@@ -118,19 +125,19 @@ public class AbilidadesDAO implements DAO<Abilidades>{
                 ab.setEquip(res.getString("equip"));
                 result.add(ab);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para cerrar la conexión (actualmente vacío)
     @Override
     public void close() throws IOException {
-
     }
 
-    public static AbilidadesDAO build(){
+    // Método estático para crear una nueva instancia de AbilidadesDAO
+    public static AbilidadesDAO build() {
         return new AbilidadesDAO();
     }
-
 }

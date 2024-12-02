@@ -10,7 +10,7 @@ public enum Scenes {
     MaterialesController("View/MaterialesController.fxml"),
     ArmasController("View/ArmasController.fxml"),
     EquipoController("View/EquipoController.fxml"),
-    AbilidadesController("View/AbilidadesController.fxml"),
+    AbilidadesController("View/HabilidadesController.fxml"),
     OtorgaController("View/OtorgaController.fxml"),
     /* pantallas de mostrar */
     Bestiario("View/Bestiario.fxml"),

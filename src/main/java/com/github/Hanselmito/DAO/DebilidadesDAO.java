@@ -11,7 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DebilidadesDAO implements DAO<Debilidades>{
+public class DebilidadesDAO implements DAO<Debilidades> {
+    // Consultas SQL para las operaciones CRUD
     private final static String INSERT = "INSERT INTO debilidades (elementoFuego, elementoAgua, elementoRayo, elementoHielo, elementoDraco, efectividadFuego, efectividadAgua, efectividadRayo, efectividadHielo, efectividadDraco, idMonstruo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE debilidades SET elementoFuego=?, elementoAgua=?, elementoRayo=?, elementoHielo=?, elementoDraco=?, efectividadFuego=?, efectividadAgua=?, efectividadRayo=?, efectividadHielo=?, efectividadDraco=?, idMonstruo=? WHERE idMonstruo=?";
     private final static String DELETE = "DELETE FROM debilidades WHERE idMonstruo=?";
@@ -19,16 +20,19 @@ public class DebilidadesDAO implements DAO<Debilidades>{
     private final static String FINDBYID = "SELECT * FROM debilidades WHERE idMonstruo=?";
 
     private Connection conn;
-    public DebilidadesDAO(){
+
+    // Constructor que inicializa la conexión a la base de datos
+    public DebilidadesDAO() {
         conn = SQLConection.getConnection();
     }
 
+    // Método para guardar una nueva debilidad en la base de datos
     @Override
     public Debilidades save(Debilidades entity) {
         Debilidades result = entity;
-        if (entity==null || entity.getId_monstruo().getId()==0) return result;
+        if (entity == null || entity.getId_monstruo().getId() == 0) return result;
         Debilidades d = findById(entity.getId_monstruo().getId());
-        if (d!=null) {
+        if (d != null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT)) {
                 pst.setString(1, entity.getElementoFuego().getPartOfDebilElementoFuego());
                 pst.setString(2, entity.getElementoAgua().getPartOfDebilElementoAgua());
@@ -49,12 +53,13 @@ public class DebilidadesDAO implements DAO<Debilidades>{
         return result;
     }
 
+    // Método para actualizar una debilidad existente en la base de datos
     @Override
     public Debilidades update(Debilidades entity) {
         Debilidades result = entity;
-        if (entity==null || entity.getId_monstruo().getId()==0) return result;
+        if (entity == null || entity.getId_monstruo().getId() == 0) return result;
         Debilidades d = findById(entity.getId_monstruo().getId());
-        if(d!=null) {
+        if (d != null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(UPDATE)) {
                 pst.setString(1, entity.getElementoFuego().getPartOfDebilElementoFuego());
                 pst.setString(2, entity.getElementoAgua().getPartOfDebilElementoAgua());
@@ -69,32 +74,34 @@ public class DebilidadesDAO implements DAO<Debilidades>{
                 pst.setInt(11, entity.getId_monstruo().getId());
                 pst.setInt(12, entity.getId_monstruo().getId());
                 pst.executeUpdate();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return result;
     }
 
+    // Método para eliminar una debilidad de la base de datos
     @Override
-    public Debilidades delete(Debilidades entity){
-        if(entity == null || entity.getId_monstruo().getId()==0) return entity;
-        try (PreparedStatement pst = conn.prepareStatement(DELETE)){
-            pst.setInt(1,entity.getId_monstruo().getId());
+    public Debilidades delete(Debilidades entity) {
+        if (entity == null || entity.getId_monstruo().getId() == 0) return entity;
+        try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
+            pst.setInt(1, entity.getId_monstruo().getId());
             pst.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return entity;
     }
 
+    // Método para encontrar una debilidad por su ID
     @Override
     public Debilidades findById(int key) {
         Debilidades result = new Debilidades();
-        try(PreparedStatement pst = conn.prepareStatement(FINDBYID)){
-            pst.setInt(1,key);
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYID)) {
+            pst.setInt(1, key);
             ResultSet res = pst.executeQuery();
-            if(res.next()){
+            if (res.next()) {
                 result.setElementoFuego(DebilElementoFuego.valueOf(res.getString("elementoFuego")));
                 result.setElementoAgua(DebilElementoAgua.valueOf(res.getString("elementoAgua")));
                 result.setElementoRayo(DebilElementoRayo.valueOf(res.getString("elementoRayo")));
@@ -107,12 +114,13 @@ public class DebilidadesDAO implements DAO<Debilidades>{
                 result.setEfectividadDraco(res.getInt("efectividadDraco"));
                 result.setId_monstruo(new MonstruosDAO().findById(res.getInt("idMonstruo")));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para encontrar todas las debilidades
     public List<Debilidades> findByAll() {
         List<Debilidades> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDALL)) {
@@ -132,14 +140,14 @@ public class DebilidadesDAO implements DAO<Debilidades>{
                 d.setId_monstruo(new MonstruosDAO().findById(res.getInt("idMonstruo")));
                 result.add(d);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para cerrar la conexión (actualmente vacío)
     @Override
-    public void close(){
-
+    public void close() {
     }
 }

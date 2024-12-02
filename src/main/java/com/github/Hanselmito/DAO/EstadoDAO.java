@@ -1,7 +1,6 @@
 package com.github.Hanselmito.DAO;
 
 import com.github.Hanselmito.Conection.SQLConection;
-import com.github.Hanselmito.Entity.Debilidades;
 import com.github.Hanselmito.Entity.Enums.*;
 import com.github.Hanselmito.Entity.Estado;
 
@@ -13,7 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EstadoDAO implements DAO<Estado>{
+public class EstadoDAO implements DAO<Estado> {
+    // Consultas SQL para las operaciones CRUD
     private final static String INSERT = "INSERT INTO estado (estadoVeneno, estadoSueno, estadoParalisis, estadoNitro, estadoAturdimiento, efectividadVeneno, efectividadSueno, efectividadParalisis, efectividadNitro, efectividadAturdimiento, idMonstruo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE estado SET estadoVeneno=?, estadoSueno=?, estadoParalisis=?, estadoNitro=?, estadoAturdimiento=?, efectividadVeneno=?, efectividadSueno=?, efectividadParalisis=?, efectividadNitro=?, efectividadAturdimiento=?, idMonstruo=? WHERE idMonstruo=?";
     private final static String DELETE = "DELETE FROM estado WHERE idMonstruo=?";
@@ -21,16 +21,19 @@ public class EstadoDAO implements DAO<Estado>{
     private final static String FINDBYID = "SELECT * FROM estado WHERE idMonstruo=?";
 
     private Connection conn;
-    public EstadoDAO(){
+
+    // Constructor que inicializa la conexión a la base de datos
+    public EstadoDAO() {
         conn = SQLConection.getConnection();
     }
 
+    // Método para guardar un nuevo estado en la base de datos
     @Override
     public Estado save(Estado entity) {
         Estado result = entity;
-        if (entity==null || entity.getId_monstruo().getId()==0) return result;
+        if (entity == null || entity.getId_monstruo().getId() == 0) return result;
         Estado es = findById(entity.getId_monstruo().getId());
-        if (es!=null) {
+        if (es != null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT)) {
                 pst.setString(1, entity.getEstadoVeneno().getPartOfAlteraEstado());
                 pst.setString(2, entity.getEstadoSueno().getPartOfAlteraEstado());
@@ -51,12 +54,13 @@ public class EstadoDAO implements DAO<Estado>{
         return result;
     }
 
+    // Método para actualizar un estado existente en la base de datos
     @Override
     public Estado update(Estado entity) {
         Estado result = entity;
-        if (entity==null || entity.getId_monstruo().getId()==0) return result;
+        if (entity == null || entity.getId_monstruo().getId() == 0) return result;
         Estado es = findById(entity.getId_monstruo().getId());
-        if(es!=null) {
+        if (es != null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(UPDATE)) {
                 pst.setString(1, entity.getEstadoVeneno().getPartOfAlteraEstado());
                 pst.setString(2, entity.getEstadoSueno().getPartOfAlteraEstado());
@@ -71,32 +75,34 @@ public class EstadoDAO implements DAO<Estado>{
                 pst.setInt(11, entity.getId_monstruo().getId());
                 pst.setInt(12, entity.getId_monstruo().getId());
                 pst.executeUpdate();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return result;
     }
 
+    // Método para eliminar un estado de la base de datos
     @Override
     public Estado delete(Estado entity) throws SQLException {
-        if(entity == null || entity.getId_monstruo().getId()==0) return entity;
-        try (PreparedStatement pst = conn.prepareStatement(DELETE)){
-            pst.setInt(1,entity.getId_monstruo().getId());
+        if (entity == null || entity.getId_monstruo().getId() == 0) return entity;
+        try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
+            pst.setInt(1, entity.getId_monstruo().getId());
             pst.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return entity;
     }
 
+    // Método para encontrar un estado por su ID
     @Override
     public Estado findById(int key) {
         Estado result = new Estado();
-        try(PreparedStatement pst = conn.prepareStatement(FINDBYID)){
-            pst.setInt(1,key);
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYID)) {
+            pst.setInt(1, key);
             ResultSet res = pst.executeQuery();
-            if(res.next()){
+            if (res.next()) {
                 result.setEstadoVeneno(EstadoVeneno.valueOf(res.getString("estadoVeneno")));
                 result.setEstadoSueno(EstadoSueno.valueOf(res.getString("estadoSueno")));
                 result.setEstadoParalisis(EstadoParalisis.valueOf(res.getString("estadoParalisis")));
@@ -109,12 +115,13 @@ public class EstadoDAO implements DAO<Estado>{
                 result.setEfectividadAturdimiento(res.getInt("efectividadAturdimiento"));
                 result.setId_monstruo(new MonstruosDAO().findById(res.getInt("idMonstruo")));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para encontrar todos los estados
     public List<Estado> findByAll() {
         List<Estado> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDALL)) {
@@ -134,14 +141,14 @@ public class EstadoDAO implements DAO<Estado>{
                 es.setId_monstruo(new MonstruosDAO().findById(res.getInt("idMonstruo")));
                 result.add(es);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para cerrar la conexión (actualmente vacío)
     @Override
     public void close() throws IOException {
-
     }
 }

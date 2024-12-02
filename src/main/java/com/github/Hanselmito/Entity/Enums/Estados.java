@@ -5,7 +5,8 @@ public enum Estados {
     plaga_de_fuego("plaga_de_fuego"),
     plaga_de_rayo("plaga_de_rayo"),
     plaga_de_hielo("plaga_de_hielo"),
-    plaga_de_agua("plaga_de_agua");
+    plaga_de_agua("plaga_de_agua"),
+    sin_estado("sin_estado");
 
     private String PartOfEstados;
     Estados(String partOfEstados) {
