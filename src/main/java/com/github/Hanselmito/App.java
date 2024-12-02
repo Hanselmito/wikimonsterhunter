@@ -4,6 +4,7 @@ package com.github.Hanselmito;
 import com.github.Hanselmito.View.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -19,14 +20,23 @@ public class App extends Application {
         launch();
     }
 
+    public static Stage getStage() {
+        return stage;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
+        App.stage = stage;
         View view = AppController.loadFXML(Scenes.ROOT);
         scene = new Scene(view.scene,  615, 500);
         currentController = (AppController) view.controller;
-        currentController.onOpen( null);
+        currentController.onOpen(null);
         stage.setScene(scene);
         stage.setMinWidth(615);
+
+        // Establecer el icono de la aplicación
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icons/Site-Icono.jpg")));
+
         stage.show();
     }
 }

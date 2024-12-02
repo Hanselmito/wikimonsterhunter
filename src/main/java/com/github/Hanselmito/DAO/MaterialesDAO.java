@@ -11,7 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaterialesDAO implements DAO<Materiales>{
+public class MaterialesDAO implements DAO<Materiales> {
+    // Consultas SQL para las operaciones CRUD
     private final static String INSERT = "INSERT INTO materiales (imagen, nombre, dropRate, mediante, cantidad, idMonstruo) VALUES (?, ?, ?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE materiales SET imagen=?, nombre=?, dropRate=?, mediante=?, cantidad=?, idMonstruo=? WHERE id=?";
     private final static String DELETE = "DELETE FROM materiales WHERE id=?";
@@ -19,16 +20,19 @@ public class MaterialesDAO implements DAO<Materiales>{
     private final static String FINDBYID = "SELECT * FROM materiales WHERE id=?";
 
     private Connection conn;
-    public MaterialesDAO(){
+
+    // Constructor que inicializa la conexión a la base de datos
+    public MaterialesDAO() {
         conn = SQLConection.getConnection();
     }
 
+    // Método para guardar un nuevo material en la base de datos
     @Override
     public Materiales save(Materiales entity) {
         Materiales result = entity;
-        if (entity==null || entity.getId_monstruo().getId()==0) return result;
+        if (entity == null || entity.getId_monstruo().getId() == 0) return result;
         Materiales m = findById(entity.getId_monstruo().getId());
-        if(m!=null) {
+        if (m != null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT)) {
                 pst.setBytes(1, entity.getImagen());
                 pst.setString(2, entity.getNombre());
@@ -44,12 +48,13 @@ public class MaterialesDAO implements DAO<Materiales>{
         return result;
     }
 
+    // Método para actualizar un material existente en la base de datos
     @Override
     public Materiales update(Materiales entity) {
         Materiales result = entity;
-        if (entity==null || entity.getId_monstruo().getId()==0) return result;
+        if (entity == null || entity.getId_monstruo().getId() == 0) return result;
         Materiales m = findById(entity.getId_monstruo().getId());
-        if(m!=null) {
+        if (m != null) {
             try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(UPDATE)) {
                 pst.setBytes(1, entity.getImagen());
                 pst.setString(2, entity.getNombre());
@@ -66,22 +71,24 @@ public class MaterialesDAO implements DAO<Materiales>{
         return result;
     }
 
+    // Método para eliminar un material de la base de datos
     @Override
     public Materiales delete(Materiales entity) throws SQLException {
-        if(entity == null || entity.getId()==0) return entity;
-        try (PreparedStatement pst = conn.prepareStatement(DELETE)){
-            pst.setInt(1,entity.getId());
+        if (entity == null || entity.getId() == 0) return entity;
+        try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
+            pst.setInt(1, entity.getId());
             pst.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return entity;
     }
 
+    // Método para encontrar un material por su ID
     @Override
     public Materiales findById(int key) {
         Materiales result = new Materiales();
-        try(PreparedStatement pst = conn.prepareStatement(FINDBYID)) {
+        try (PreparedStatement pst = conn.prepareStatement(FINDBYID)) {
             pst.setString(1, String.valueOf(key));
             try (ResultSet res = pst.executeQuery()) {
                 if (res.next()) {
@@ -94,13 +101,14 @@ public class MaterialesDAO implements DAO<Materiales>{
                     result.setId_monstruo(new MonstruosDAO().findById(res.getInt("idMonstruo")));
                 }
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
-    public List<Materiales> findAll(){
+    // Método para encontrar todos los materiales
+    public List<Materiales> findAll() {
         List<Materiales> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDALL)) {
             ResultSet res = pst.executeQuery();
@@ -115,18 +123,19 @@ public class MaterialesDAO implements DAO<Materiales>{
                 m.setId_monstruo(new MonstruosDAO().findById(res.getInt("idMonstruo")));
                 result.add(m);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    // Método para cerrar la conexión (actualmente vacío)
     @Override
     public void close() throws IOException {
-
     }
 
-    public static MaterialesDAO build(){
+    // Método estático para crear una nueva instancia de MaterialesDAO
+    public static MaterialesDAO build() {
         return new MaterialesDAO();
     }
 }

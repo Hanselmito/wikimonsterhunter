@@ -62,3 +62,15 @@
     -fx-alignment: center-left;
     -fx-padding: 10;
 }
+.button {
+    -fx-background-color: #4c8caf;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 5 10;
+}
+.tab-pane {
+    -fx-background-color: #e9faff;
+}

@@ -9,36 +9,36 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.MonstruosController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="701.0" stylesheets="@../../../../Styles/StylesCrontroller.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.MonstruosController">
    <children>
       <TextField fx:id="nombre" layoutX="82.0" layoutY="38.0" promptText="nombre" />
       <TextField fx:id="titulos" layoutX="82.0" layoutY="105.0" promptText="titulos" />
-      <ChoiceBox fx:id="clase" layoutX="250.0" layoutY="33.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="elementos" layoutX="414.0" layoutY="33.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="estados" layoutX="250.0" layoutY="94.0" prefWidth="150.0" />
-      <TextField fx:id="habitats" layoutX="82.0" layoutY="224.0" promptText="habitats" />
-      <TextField fx:id="tamano" layoutX="82.0" layoutY="287.0" promptText="tamaño" />
-      <TextField fx:id="parientes" layoutX="82.0" layoutY="345.0" promptText="Parientes" />
-      <ImageView fx:id="imageView" fitHeight="191.0" fitWidth="217.0" layoutX="333.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="file" layoutX="274.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#loadImage" text="File" />
+      <ChoiceBox fx:id="clase" layoutX="274.0" layoutY="32.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="elementos" layoutX="435.0" layoutY="30.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="estados" layoutX="274.0" layoutY="93.0" prefWidth="150.0" />
+      <TextField fx:id="habitats" layoutX="106.0" layoutY="179.0" promptText="habitats" />
+      <TextField fx:id="tamano" layoutX="106.0" layoutY="242.0" promptText="tamaño" />
+      <TextField fx:id="parientes" layoutX="106.0" layoutY="300.0" promptText="Parientes" />
+      <ImageView fx:id="imageView" fitHeight="191.0" fitWidth="217.0" layoutX="355.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="file" layoutX="299.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#loadImage" text="Imagen" />
       <Label layoutX="82.0" layoutY="20.0" text="nombre" />
       <Label layoutX="82.0" layoutY="82.0" text="titulos" />
-      <Label layoutX="85.0" layoutY="200.0" text="habitats" />
-      <Label layoutX="85.0" layoutY="257.0" text="tamaño" />
-      <Label layoutX="85.0" layoutY="321.0" text="Parientes" />
-      <Label layoutX="250.0" layoutY="15.0" text="clase" />
-      <Label layoutX="414.0" layoutY="15.0" text="elementos" />
-      <Label layoutX="250.0" layoutY="79.0" text="estados" />
-      <Label layoutX="414.0" layoutY="67.0" text="debilidad" />
-      <Button fx:id="insert" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#handleInsertButtonAction" text="Insert" />
-      <ChoiceBox fx:id="debilidad" layoutX="414.0" layoutY="94.0" prefWidth="150.0" />
+      <Label layoutX="109.0" layoutY="155.0" text="habitats" />
+      <Label layoutX="109.0" layoutY="212.0" text="tamaño" />
+      <Label layoutX="109.0" layoutY="276.0" text="Parientes" />
+      <Label layoutX="274.0" layoutY="14.0" text="clase" />
+      <Label layoutX="435.0" layoutY="12.0" text="elementos" />
+      <Label layoutX="274.0" layoutY="78.0" text="estados" />
+      <Label layoutX="435.0" layoutY="66.0" text="debilidad" />
+      <Button fx:id="insert" layoutX="19.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#handleInsertButtonAction" text="Insertar" />
+      <ChoiceBox fx:id="debilidad" layoutX="435.0" layoutY="93.0" prefWidth="150.0" />
       <TableView fx:id="table" layoutX="607.0" layoutY="38.0" prefHeight="342.0" prefWidth="79.0">
         <columns>
           <TableColumn fx:id="ID" prefWidth="78.0" text="ID" />
         </columns>
       </TableView>
-      <Button fx:id="update" layoutX="14.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#handleUpdateButtonAction" text="Update" />
-      <Button fx:id="Back" layoutX="16.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back" />
-      <Button fx:id="Delete" layoutX="16.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#handleDeleteButtonAction" text="Delete" />
+      <Button fx:id="update" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#handleUpdateButtonAction" text="Actualizar" />
+      <Button fx:id="Back" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Volver" />
+      <Button fx:id="Delete" layoutX="17.0" layoutY="266.0" mnemonicParsing="false" onMouseClicked="#handleDeleteButtonAction" text="Borrar" />
    </children>
 </AnchorPane>

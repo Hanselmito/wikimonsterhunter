@@ -30,14 +30,14 @@ public class Bestiario extends Controller implements Initializable {
 
     private MonstruosDAO monstruosDAO = new MonstruosDAO();
 
-    // Map to store images for each Tab
+    // Mapa para almacenar imágenes para cada pestaña
     private Map<String, String> tabImages = new HashMap<>();
-    // Map to store descriptions for each Clase
+    // Mapa para almacenar descripciones para cada Clase
     private Map<String, String> tabDescriptions = new HashMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Initialize the map with image paths for each Tab
+        // Inicializar el mapa con rutas de imágenes para cada pestaña
         tabImages.put("Dragon_Anciano", "/Icons/Bestiario-Icons/MHWI-Render_Alatreon.jpg");
         tabImages.put("Wyvern_de_Colmillos", "/Icons/Bestiario-Icons/MHRise-Render_Zinogre.jpg");
         tabImages.put("Wyvern_Volador", "/Icons/Bestiario-Icons/MHW-Render_Rathalos_Celeste.jpg");
@@ -46,7 +46,7 @@ public class Bestiario extends Controller implements Initializable {
         tabImages.put("Leviatan", "/Icons/Bestiario-Icons/MHX-Render_Lagiacrus.jpg");
         tabImages.put("Wyvern_Pajaro", "/Icons/Bestiario-Icons/MHRise-Render_Kulu-Ya-Ku.jpg");
 
-        // Initialize the map with descriptions for each Clase
+        // Inicializar el mapa con descripciones para cada Clase
         tabDescriptions.put("Dragon_Anciano", "Monstruos caracterizados por tener normalmente cuatro patas y dos alas, su poder y longevidad los convierten en criaturas de leyenda.\n El poder de muchos es tal que pueden afectar al clima y se consideran desastres naturales vivientes, por lo que las poblaciones humanas se mantienen en constante alerta.\n Se pueden encontrar en muchos hábitats, desde montañas y desiertos a ruinas y fortificaciones.");
         tabDescriptions.put("Wyvern_de_Colmillos", "Monstruos caracterizados por su aspecto reptiliano y postura cuadrúpeda.\n Todos ellos son terrestres y pueden desplazarse por su entorno con gran agilidad.\n Algunos recurren a su velocidad para defenderse o utilizan sus poderosas extremidades para asestar golpes, mientras que otros viven en grupos liderados por un líder para cazar.\n Inicialmente solo se conocía al Zinogre, pero se han descubierto muchas más en el Nuevo Mundo.");
         tabDescriptions.put("Wyvern_Volador", "Monstruos dotados de un par de alas, son la clase dominante en el mundo de Monster Hunter.\n Aunque la mayoría se caracterizan por ser bípedos y tener patas delanteras convertidas en alas, hay algunos cuyas alas se han convertido parcial o completamente en patas para caminar de forma cuadrúpeda.\n Prosperan en todos los entornos y son eficaces depredadores.");
@@ -60,33 +60,33 @@ public class Bestiario extends Controller implements Initializable {
             Clase clase = Clase.valueOf(tabText.replace(" ", "_"));
             AnchorPane anchorPane = new AnchorPane();
             VBox vBox = new VBox(10);
-            vBox.setAlignment(Pos.CENTER); // Center the content
+            vBox.setAlignment(Pos.CENTER); // Centrar el contenido
 
-            // Class name label
+            // Etiqueta del nombre de la clase
             Label classNameLabel = new Label(clase.getPartOfClase());
             classNameLabel.getStyleClass().add("label-title");
             HBox titleBox = new HBox(classNameLabel);
-            titleBox.setAlignment(Pos.CENTER); // Align title to the right
+            titleBox.setAlignment(Pos.CENTER); // Alinear el título al centro
 
-            // Image
+            // Imagen
             ImageView imageView = new ImageView();
             String imagePath = tabImages.get(tabText);
             if (imagePath != null) {
                 imageView.setImage(new Image(getClass().getResourceAsStream(imagePath)));
             } else {
-                // Handle missing image
+                // Manejar imagen faltante
                 imageView.setImage(new Image(getClass().getResourceAsStream("/Icons/descarga (1).jpg")));
             }
             imageView.setFitHeight(200);
             imageView.setFitWidth(200);
-            imageView.getStyleClass().add("image-left"); // Add CSS class for left alignment
+            imageView.getStyleClass().add("image-left"); // Agregar clase CSS para alineación a la izquierda
 
-            // Description label
+            // Etiqueta de descripción
             String description = tabDescriptions.get(tabText);
             Label descriptionLabel = new Label(description != null ? description : "Descripción no disponible");
             descriptionLabel.getStyleClass().add("label-description");
 
-            // List of monster names and images
+            // Lista de nombres e imágenes de monstruos
             ListView<VBox> monsterListView = new ListView<>();
             monsterListView.setOrientation(javafx.geometry.Orientation.HORIZONTAL);
 
@@ -94,17 +94,17 @@ public class Bestiario extends Controller implements Initializable {
             for (Monstruos monstruo : monstruosList) {
                 VBox monsterBox = new VBox(5);
 
-                // Monster name label
+                // Etiqueta del nombre del monstruo
                 Label monsterNameLabel = new Label(monstruo.getNombre());
                 monsterNameLabel.getStyleClass().add("label-subtitle");
 
                 monsterBox.getChildren().add(monsterNameLabel);
                 monsterListView.getItems().add(monsterBox);
 
-                // Add event handler for selection
+                // Agregar manejador de eventos para la selección
                 monsterBox.setOnMouseClicked(event -> {
                     try {
-                        // Switch to MonstrarMonstruos screen and pass the selected monster name
+                        // Cambiar a la pantalla MonstrarMonstruos y pasar el nombre del monstruo seleccionado
                         AppController appController = (AppController) App.currentController;
                         appController.changeScene(Scenes.MonstrarMonstruos, monstruo.getNombre());
                     } catch (Exception e) {
@@ -121,11 +121,12 @@ public class Bestiario extends Controller implements Initializable {
 
     @FXML
     private void goBack() throws Exception {
-        App.currentController.changeScene(Scenes.Menu,null);
+        App.currentController.changeScene(Scenes.Menu, null);
     }
 
     @Override
     public void onOpen(Object input) throws Exception {
+        App.getStage().setMaximized(true);
     }
 
     @Override

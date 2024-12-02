@@ -115,12 +115,13 @@ public class MenuAdminController extends Controller implements Initializable {
                 e.printStackTrace();
             }
         });
-        ABSC.setText(AbilidadesController.class.getSimpleName());
+        ABSC.setText(HabilidadesController.class.getSimpleName());
     }
 
     @Override
     public void onOpen(Object input) throws Exception {
-        // Implement any logic needed when the screen is opened
+        App.getStage().setWidth(700);
+        App.getStage().setHeight(430);
     }
 
     @Override

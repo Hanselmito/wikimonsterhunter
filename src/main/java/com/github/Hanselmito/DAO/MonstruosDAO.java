@@ -25,37 +25,49 @@ public class MonstruosDAO implements DAO<Monstruos>{
     private final static String FINDBYNAMEJOINM = "SELECT ma.imagen, ma.nombre, ma.dropRate, ma.mediante, ma.cantidad FROM monstruos m JOIN materiales ma ON m.id = ma.idMonstruo WHERE m.nombre=?";
     private final static String FINDBYARMASJOIN = "SELECT a.imagen, a.nombre FROM armas a JOIN materiales ma ON a.idMateriales = ma.id JOIN monstruos mo ON ma.idMonstruo = mo.id WHERE mo.nombre = ?";
     private final static String FINDBYEQUIPOJOIN = "SELECT e.imagen, e.nombre, a.nombre AS habilidad FROM equipo e JOIN otorga o ON e.id = o.idEquipo JOIN abilidades a ON o.idAbilidades = a.id JOIN materiales ma ON e.idMateriales = ma.id JOIN monstruos mo ON ma.idMonstruo = mo.id WHERE mo.nombre = ?";
+    private final static String FINDALLNAME = "SELECT nombre FROM monstruos";
 
     private Connection conn;
     public MonstruosDAO(){
         conn = SQLConection.getConnection();
     }
 
+    /*
+    * Guarda un objeto Monstruos en la base de datos.
+    * Si la operación es exitosa, se actualiza el ID del objeto con el valor generado por la base de datos.
+    * */
     @Override
     public Monstruos save(Monstruos entity) {
         Monstruos result = entity;
-        if (entity==null || entity.getId()==0) return result;
-        Monstruos m = findById(entity.getId());
-        if(m!=null){
-            try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT)){
-                pst.setString(1, entity.getNombre());
-                pst.setString(2, entity.getTitulos());
-                pst.setString(3, entity.getClase().getPartOfClase());
-                pst.setString(4, entity.getElementos().getPartOfElementos());
-                pst.setString(5, entity.getEstados().getPartOfEstados());
-                pst.setString(6, entity.getDebilidad().getPartOfDebilidad());
-                pst.setString(7, entity.getHabitats());
-                pst.setString(8, entity.getTamano());
-                pst.setString(9, entity.getParientes());
-                pst.setBytes(10, entity.getImagen());
-                pst.executeUpdate();
-            }catch (Exception e){
-                e.printStackTrace();
+        if (entity == null) return result;
+        try (PreparedStatement pst = SQLConection.getConnection().prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            pst.setString(1, entity.getNombre());
+            pst.setString(2, entity.getTitulos());
+            pst.setString(3, entity.getClase().getPartOfClase());
+            pst.setString(4, entity.getElementos().getPartOfElementos());
+            pst.setString(5, entity.getEstados().getPartOfEstados());
+            pst.setString(6, entity.getDebilidad().getPartOfDebilidad());
+            pst.setString(7, entity.getHabitats());
+            pst.setString(8, entity.getTamano());
+            pst.setString(9, entity.getParientes());
+            pst.setBytes(10, entity.getImagen());
+            pst.executeUpdate();
+
+            try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    entity.setId(generatedKeys.getInt(1));
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return result;
     }
 
+    /*
+    * Actualiza un objeto Monstruos existente en la base de datos.
+    *  Utiliza el ID del objeto para identificar el registro a actualizar.
+    */
     @Override
     public Monstruos update(Monstruos entity) {
         Monstruos result = entity;
@@ -79,6 +91,10 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return result;
     }
 
+    /*
+    * Elimina un objeto Monstruos de la base de datos utilizando su ID.
+    *  Si el ID es 0 o el objeto es nulo, no se realiza ninguna operación.
+    */
     @Override
     public Monstruos delete(Monstruos entity) {
         if(entity == null || entity.getId()==0) return entity;
@@ -91,6 +107,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return entity;
     }
 
+    /*
+    * Recupera todos los objetos Monstruos de la base de datos y los devuelve en una lista.
+    */
     public List<Monstruos> findAll(){
         List<Monstruos> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDALL)) {
@@ -116,6 +135,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return result;
     }
 
+    /*
+    * Recupera todos los nombres de Monstruos que pertenecen a una clase específica y los devuelve en una lista.
+    */
     public List<Monstruos> findByClase(String key){
         List<Monstruos> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYCLASE)){
@@ -132,6 +154,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return result;
     }
 
+    /*
+    * Recupera todos los detalles de los Monstruos que coinciden con un nombre específico y los devuelve en una lista.
+    */
     public List<Monstruos> findByName(String key){
         List<Monstruos> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYNAME)){
@@ -157,6 +182,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return result;
     }
 
+    /*
+    * Recupera la fisiología de un Monstruos específico por su nombre y la devuelve en una lista de objetos Fisiologia.
+    */
     public List<Fisiologia> findFisiologiaByMonstruoName(String nombre) {
         List<Fisiologia> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYNAMEJOINF)) {
@@ -179,6 +207,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return result;
     }
 
+    /*
+    * Recupera las debilidades y estados de un Monstruos específico por su nombre y los devuelve en una lista de arreglos de objetos.
+    */
     public List<Object[]> findDebilidadesYEstadosByMonstruoName(String nombre) {
         List<Object[]> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYNAMEJOINDE)) {
@@ -217,6 +248,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return result;
     }
 
+    /*
+    * Recupera los materiales asociados a un Monstruos específico por su nombre y los devuelve en una lista de objetos Materiales.
+    */
     public List<Materiales> findMaterialesByMonstruoName(String nombre) {
         List<Materiales> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYNAMEJOINM)) {
@@ -238,6 +272,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return result;
     }
 
+    /*
+    * Recupera las armas asociadas a un Monstruos específico por su nombre y las devuelve en una lista de objetos Armas.
+    */
     public List<Armas> findArmasByMonstruoName(String monsterName) {
         List<Armas> armasList = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYARMASJOIN)) {
@@ -256,6 +293,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return armasList;
     }
 
+    /*
+    * Recupera el equipo asociado a un Monstruos específico por su nombre y lo devuelve en una lista de objetos Equipo.
+    */
     public List<Equipo> findEquipoByMonstruoName(String monsterName) {
         List<Equipo> equipoList = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FINDBYEQUIPOJOIN)) {
@@ -279,6 +319,9 @@ public class MonstruosDAO implements DAO<Monstruos>{
         return equipoList;
     }
 
+    /*
+    * Recupera un objeto Monstruos específico por su ID y lo devuelve.
+     */
     @Override
     public Monstruos findById(int key) {
         Monstruos result = new Monstruos();
@@ -300,6 +343,22 @@ public class MonstruosDAO implements DAO<Monstruos>{
                 }
             }
         }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /*
+    * Recupera todos los nombres de los Monstruos de la base de datos y los devuelve en una lista.
+    */
+    public List<String> findAllNames() {
+        List<String> result = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FINDALLNAME)) {
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                result.add(res.getString("nombre"));
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;

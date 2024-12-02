@@ -111,7 +111,7 @@ public class ArmasController extends Controller implements Initializable {
     }
 
     private void LoadArmasByIdData(){
-        List<Armas> armasList = arDAO.findALL();
+        List<Armas> armasList = arDAO.findAll();
         this.ArmasList = FXCollections.observableList(armasList);
         table.setItems(ArmasList);
     }
