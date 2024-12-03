@@ -19,6 +19,7 @@ public class ArmasDAO implements DAO<Armas> {
     private final static String DELETE = "DELETE FROM armas WHERE id=?";
     private final static String FINDALL = "SELECT * FROM armas";
     private final static String FINDBYID = "SELECT * FROM armas WHERE id=?";
+    private final static String FINDALLNAME = "SELECT nombre FROM armas";
 
     private Connection conn;
 
@@ -139,6 +140,19 @@ public class ArmasDAO implements DAO<Armas> {
                 a.setMateriales(res.getString("materiales"));
                 a.setId_materiales(new MaterialesDAO().findById(res.getInt("idMateriales")));
                 result.add(a);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<String> findAllNames() {
+        List<String> result = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FINDALLNAME)) {
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                result.add(res.getString("nombre"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

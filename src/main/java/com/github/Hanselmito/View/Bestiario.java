@@ -104,9 +104,9 @@ public class Bestiario extends Controller implements Initializable {
                 // Agregar manejador de eventos para la selección
                 monsterBox.setOnMouseClicked(event -> {
                     try {
-                        // Cambiar a la pantalla MonstrarMonstruos y pasar el nombre del monstruo seleccionado
+                        // Cambiar a la pantalla MostrarMonstruos y pasar el nombre del monstruo seleccionado
                         AppController appController = (AppController) App.currentController;
-                        appController.changeScene(Scenes.MonstrarMonstruos, monstruo.getNombre());
+                        appController.changeScene(Scenes.MostrarMonstruos, monstruo.getNombre());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

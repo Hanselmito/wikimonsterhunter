@@ -1,4 +1,4 @@
-// MonstrarMonstruos.java
+// MostrarMonstruos.java
 package com.github.Hanselmito.View;
 
 import com.github.Hanselmito.App;
@@ -8,6 +8,7 @@ import com.github.Hanselmito.Entity.Debilidades;
 import com.github.Hanselmito.Entity.Estado;
 import com.github.Hanselmito.Entity.Monstruos;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -15,14 +16,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MonstrarMonstruos extends Controller implements Initializable {
+public class MostrarMonstruos extends Controller implements Initializable {
 
     @FXML
     private TabPane tabPane; // Pestañas de la interfaz
@@ -111,71 +114,133 @@ public class MonstrarMonstruos extends Controller implements Initializable {
                     vBoxDatos.getStyleClass().add("datos-vbox");
                     vBox.getChildren().add(vBoxDatos);
                 }
-            } else if (tabText.equals("Fisiologia")) {
-                // Pestaña de fisiología del monstruo
+            }else if (tabText.equals("Fisiologia")) {
                 List<Fisiologia> fisiologiaList = monstruosDAO.findFisiologiaByMonstruoName(monsterName);
                 for (Fisiologia fisiologia : fisiologiaList) {
-                    ImageView imageView = new ImageView();
-                    imageView.setImage(new Image(new ByteArrayInputStream(fisiologia.getImagen())));
-                    imageView.setFitHeight(100);
-                    imageView.setFitWidth(100);
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/github/Hanselmito/View/tablaFisio.fxml"));
+                        AnchorPane fisiologiaPane = loader.load();
 
-                    Label puntosDebilesLabel = new Label("Puntos Debiles: " + fisiologia.getPuntos_debiles());
-                    Label corteLabel = new Label("Corte: " + fisiologia.getCorte());
-                    Label impactoLabel = new Label("Impacto: " + fisiologia.getImpacto());
-                    Label disparoLabel = new Label("Disparo: " + fisiologia.getDisparo());
-                    Label partesRompiblesLabel = new Label("Partes Rompibles: " + fisiologia.getPartes_rompibles());
+                        Label tituloLabel = (Label) fisiologiaPane.lookup("#titulo");
+                        tituloLabel.setText("Fisiologia");
 
-                    VBox vBoxLeft = new VBox(10, imageView, puntosDebilesLabel);
-                    VBox vBoxRight = new VBox(10, corteLabel, impactoLabel, disparoLabel, partesRompiblesLabel);
-                    HBox hBox = new HBox(20, vBoxLeft, vBoxRight);
+                        ImageView imageView = (ImageView) fisiologiaPane.lookup("#imageView");
+                        imageView.setImage(new Image(new ByteArrayInputStream(fisiologia.getImagen())));
 
-                    VBox vBoxFisiologia = new VBox(10, hBox);
-                    vBoxFisiologia.getStyleClass().add("fisiologia-vbox");
-                    vBox.getChildren().add(vBoxFisiologia);
+                        Label puntosLabel = (Label) fisiologiaPane.lookup("#puntos");
+                        puntosLabel.setText("Puntos Debiles");
+
+                        Label datosLabel = (Label) fisiologiaPane.lookup("#datos");
+                        datosLabel.setText(fisiologia.getPuntos_debiles());
+                        datosLabel.setWrapText(true);
+
+                        Label parteRompibleLabel = (Label) fisiologiaPane.lookup("#parteRompible");
+                        parteRompibleLabel.setText("Partes Rompibles");
+
+                        Label corLabel = (Label) fisiologiaPane.lookup("#cor");
+                        corLabel.setText("Corte");
+
+                        Label impactLabel = (Label) fisiologiaPane.lookup("#impact");
+                        impactLabel.setText("Impacto");
+
+                        Label disparoLabel = (Label) fisiologiaPane.lookup("#disparo");
+                        disparoLabel.setText("Disparo");
+
+                        Label infoCorteLabel = (Label) fisiologiaPane.lookup("#infoCorte");
+                        infoCorteLabel.setText("★".repeat(fisiologia.getCorte()));
+
+                        Label infoImpactoLabel = (Label) fisiologiaPane.lookup("#infoImpacto");
+                        infoImpactoLabel.setText("★".repeat(fisiologia.getImpacto()));
+
+                        Label infoDisparoLabel = (Label) fisiologiaPane.lookup("#infoDisparo");
+                        infoDisparoLabel.setText("★".repeat(fisiologia.getDisparo()));
+
+                        Label textoParteLabel = (Label) fisiologiaPane.lookup("#textoParte");
+                        textoParteLabel.setText(fisiologia.getPartes_rompibles());
+
+                        vBox.getChildren().add(fisiologiaPane);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            } else if (tabText.equals("Debilidades y Estados")) {
-                // Pestaña de debilidades y estados del monstruo
-                Label debilidadesTitleLabel = new Label("Debilidades");
-                vBox.getChildren().add(debilidadesTitleLabel);
-
-                Label elementosTitleLabel = new Label("Elementos");
-                ImageView imageView = new ImageView();
-                Label estadosTitleLabel = new Label("Estados");
-
-                HBox titleHBox = new HBox(20, elementosTitleLabel, imageView, estadosTitleLabel);
-                vBox.getChildren().add(titleHBox);
-
-                VBox elementosVBox = new VBox(10);
-                elementosVBox.getStyleClass().add("elementos-vbox");
-                VBox elementosValuesVBox = new VBox(10);
-
-                VBox estadosVBox = new VBox(10);
-                estadosVBox.getStyleClass().add("estados-vbox");
-                VBox estadosValuesVBox = new VBox(10);
-
+            }else if (tabText.equals("Debilidades y Estados")) {
                 List<Object[]> debilidadesYEstadosList = monstruosDAO.findDebilidadesYEstadosByMonstruoName(monsterName);
                 for (Object[] debilidadesYEstados : debilidadesYEstadosList) {
                     Debilidades debilidad = (Debilidades) debilidadesYEstados[0];
                     Estado estado = (Estado) debilidadesYEstados[1];
 
-                    // Agregar elementos y sus valores
-                    addElementWithValue(elementosVBox, elementosValuesVBox, "Fuego", debilidad.getEfectividadFuego());
-                    addElementWithValue(elementosVBox, elementosValuesVBox, "Agua", debilidad.getEfectividadAgua());
-                    addElementWithValue(elementosVBox, elementosValuesVBox, "Rayo", debilidad.getEfectividadRayo());
-                    addElementWithValue(elementosVBox, elementosValuesVBox, "Hielo", debilidad.getEfectividadHielo());
-                    addElementWithValue(elementosVBox, elementosValuesVBox, "Draco", debilidad.getEfectividadDraco());
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/github/Hanselmito/View/tablaDyE.fxml"));
+                        AnchorPane debilidadesEstadosPane = loader.load();
 
-                    // Agregar estados y sus valores
-                    addStateWithValue(estadosVBox, estadosValuesVBox, "Veneno", estado.getEfectividadVeneno());
-                    addStateWithValue(estadosVBox, estadosValuesVBox, "Sueño", estado.getEfectividadSueno());
-                    addStateWithValue(estadosVBox, estadosValuesVBox, "Parálisis", estado.getEfectividadParalisis());
-                    addStateWithValue(estadosVBox, estadosValuesVBox, "Nitro", estado.getEfectividadNitro());
-                    addStateWithValue(estadosVBox, estadosValuesVBox, "Aturdimiento", estado.getEfectividadAturdimiento());
+                        Label tituloLabel = (Label) debilidadesEstadosPane.lookup("#Titulo");
+                        tituloLabel.setText("Debilidades y Estados");
+
+                        Label fuegoLabel = (Label) debilidadesEstadosPane.lookup("#Fuego");
+                        fuegoLabel.setText("Fuego");
+
+                        Label infoFuegoLabel = (Label) debilidadesEstadosPane.lookup("#infoF");
+                        infoFuegoLabel.setText("★".repeat(debilidad.getEfectividadFuego()));
+
+                        Label aguaLabel = (Label) debilidadesEstadosPane.lookup("#Agua");
+                        aguaLabel.setText("Agua");
+
+                        Label infoAguaLabel = (Label) debilidadesEstadosPane.lookup("#infoA");
+                        infoAguaLabel.setText("★".repeat(debilidad.getEfectividadAgua()));
+
+                        Label rayoLabel = (Label) debilidadesEstadosPane.lookup("#Rayo");
+                        rayoLabel.setText("Rayo");
+
+                        Label infoRayoLabel = (Label) debilidadesEstadosPane.lookup("#infoR");
+                        infoRayoLabel.setText("★".repeat(debilidad.getEfectividadRayo()));
+
+                        Label hieloLabel = (Label) debilidadesEstadosPane.lookup("#Hielo");
+                        hieloLabel.setText("Hielo");
+
+                        Label infoHieloLabel = (Label) debilidadesEstadosPane.lookup("#infoH");
+                        infoHieloLabel.setText("★".repeat(debilidad.getEfectividadHielo()));
+
+                        Label dracoLabel = (Label) debilidadesEstadosPane.lookup("#Draco");
+                        dracoLabel.setText("Draco");
+
+                        Label infoDracoLabel = (Label) debilidadesEstadosPane.lookup("#infoD");
+                        infoDracoLabel.setText("★".repeat(debilidad.getEfectividadDraco()));
+
+                        Label venenoLabel = (Label) debilidadesEstadosPane.lookup("#Veneno");
+                        venenoLabel.setText("Veneno");
+
+                        Label infoVenenoLabel = (Label) debilidadesEstadosPane.lookup("#infoV");
+                        infoVenenoLabel.setText("★".repeat(estado.getEfectividadVeneno()));
+
+                        Label suenoLabel = (Label) debilidadesEstadosPane.lookup("#Sueño");
+                        suenoLabel.setText("Sueño");
+
+                        Label infoSuenoLabel = (Label) debilidadesEstadosPane.lookup("#infoS");
+                        infoSuenoLabel.setText("★".repeat(estado.getEfectividadSueno()));
+
+                        Label paralisisLabel = (Label) debilidadesEstadosPane.lookup("#Paralisis");
+                        paralisisLabel.setText("Parálisis");
+
+                        Label infoParalisisLabel = (Label) debilidadesEstadosPane.lookup("#infoP");
+                        infoParalisisLabel.setText("★".repeat(estado.getEfectividadParalisis()));
+
+                        Label nitroLabel = (Label) debilidadesEstadosPane.lookup("#Nitro");
+                        nitroLabel.setText("Nitro");
+
+                        Label infoNitroLabel = (Label) debilidadesEstadosPane.lookup("#infoN");
+                        infoNitroLabel.setText("★".repeat(estado.getEfectividadNitro()));
+
+                        Label aturdimientoLabel = (Label) debilidadesEstadosPane.lookup("#Aturdimiento");
+                        aturdimientoLabel.setText("Aturdimiento");
+
+                        Label infoAturdimientoLabel = (Label) debilidadesEstadosPane.lookup("#infoAT");
+                        infoAturdimientoLabel.setText("★".repeat(estado.getEfectividadAturdimiento()));
+
+                        vBox.getChildren().add(debilidadesEstadosPane);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                HBox hBox = new HBox(20, elementosVBox, elementosValuesVBox, estadosVBox, estadosValuesVBox);
-                vBox.getChildren().add(hBox);
             }
 
             anchorPane.getChildren().add(vBox);

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="248.0" prefWidth="616.0" stylesheets="@../../../../Styles/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.MostrarMonstruos">
+   <children>
+      <Pane layoutX="-1.0" prefHeight="43.0" prefWidth="630.0" styleClass="pane-selected" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="titulo" layoutX="253.0" layoutY="7.0" prefHeight="30.0" prefWidth="134.0" styleClass="label-titulo" text="titulo" />
+         </children>
+      </Pane>
+      <HBox layoutY="42.0" prefHeight="187.0" prefWidth="616.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="204.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox prefHeight="183.0" prefWidth="141.0">
+               <children>
+                  <Pane prefHeight="57.0" prefWidth="100.0" styleClass="pane-selected">
+                     <children>
+                        <Label fx:id="puntos" layoutX="7.0" layoutY="3.0" prefHeight="43.0" prefWidth="134.0" styleClass="label-titulo" text="Puntos" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="73.0" prefWidth="142.0">
+                     <children>
+                        <Label fx:id="datos" layoutX="7.0" layoutY="-1.0" prefHeight="67.0" prefWidth="134.0" text="datos" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="73.0" prefWidth="129.0" styleClass="pane-selected">
+                     <children>
+                        <Label fx:id="parteRompible" layoutX="18.0" layoutY="17.0" prefHeight="41.0" prefWidth="95.0" styleClass="label-titulo" text="Parte rompible" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <VBox prefHeight="183.0" prefWidth="307.0">
+               <children>
+                  <HBox prefHeight="50.0" prefWidth="307.0">
+                     <children>
+                        <Pane prefHeight="43.0" prefWidth="85.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="cor" layoutX="15.0" layoutY="13.0" prefHeight="17.0" prefWidth="55.0" styleClass="label-titulo" text="Cor" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="43.0" prefWidth="123.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="impact" layoutX="18.0" layoutY="13.0" prefHeight="17.0" prefWidth="63.0" styleClass="label-titulo" text="Impact" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="43.0" prefWidth="97.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="disparo" layoutX="12.0" layoutY="13.0" prefHeight="17.0" prefWidth="55.0" styleClass="label-titulo" text="disparo" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="71.0" prefWidth="307.0">
+                     <children>
+                        <Pane prefHeight="65.0" prefWidth="87.0">
+                           <children>
+                              <Label fx:id="infoCorte" layoutX="13.0" layoutY="9.0" prefHeight="41.0" prefWidth="63.0" text="infoCorte" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="57.0" prefWidth="121.0">
+                           <children>
+                              <Label fx:id="infoImpacto" layoutX="9.0" layoutY="9.0" prefHeight="41.0" prefWidth="85.0" text="infoImpacto" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="85.0">
+                           <children>
+                              <Label fx:id="infoDisparo" layoutX="6.0" layoutY="3.0" prefHeight="49.0" prefWidth="78.0" text="infoDisparo" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="62.0" prefWidth="307.0">
+                     <children>
+                        <Label fx:id="textoParte" layoutY="-3.0" prefHeight="67.0" prefWidth="307.0" text="textoParte" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -14,7 +14,7 @@ public enum Scenes {
     OtorgaController("View/OtorgaController.fxml"),
     /* pantallas de mostrar */
     Bestiario("View/Bestiario.fxml"),
-    MonstrarMonstruos("View/MonstrarMonstruos.fxml"),
+    MostrarMonstruos("View/MostrarMonstruos.fxml"),
     MaterialMonstruo("View/MaterialesMonstruo.fxml"),
     ArmasMonstruo("View/ArmasMonstruo.fxml"),
     EquipoMonstruo("View/EquipoMonstruo.fxml"),
