@@ -74,3 +74,12 @@
 .tab-pane {
     -fx-background-color: #e9faff;
 }
+
+.pane-selected{
+    -fx-background-color: #3f2c22;
+    -fx-border-color: #ece7e4;
+}
+.label-titulo{
+    -fx-font-weight: bold;
+    -fx-text-fill: #eee8f5;
+}

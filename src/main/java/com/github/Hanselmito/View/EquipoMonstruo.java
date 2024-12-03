@@ -96,7 +96,7 @@ public class EquipoMonstruo extends Controller implements Initializable {
     @FXML
     private void goBack() throws Exception {
         // Cambiar a la escena de mostrar monstruos
-        App.currentController.changeScene(Scenes.MonstrarMonstruos, monsterName);
+        App.currentController.changeScene(Scenes.MostrarMonstruos, monsterName);
     }
 
     @Override

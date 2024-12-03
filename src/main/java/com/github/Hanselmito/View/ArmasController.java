@@ -136,6 +136,12 @@ public class ArmasController extends Controller implements Initializable {
             return;
         }
 
+        List<String> existingNames = arDAO.findAllNames();
+        if (existingNames.contains(nombre)) {
+            showAlert("El nombre del arma ya existe. Por favor, elija otro nombre.");
+            return;
+        }
+
         // Convert image to byte array
         byte[] imageData = new byte[(int) imageFile.length()];
         FileInputStream fis = new FileInputStream(imageFile);

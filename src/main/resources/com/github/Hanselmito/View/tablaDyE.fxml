@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="387.0" prefWidth="600.0" stylesheets="@../../../../Styles/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.MostrarMonstruos">
+   <children>
+      <Pane layoutX="-1.0" prefHeight="33.0" prefWidth="600.0" styleClass="pane-selected" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="Titulo" layoutX="246.0" layoutY="8.0" prefHeight="17.0" prefWidth="161.0" styleClass="label-titulo" text="Titulo" />
+         </children>
+      </Pane>
+      <Pane layoutX="-1.0" layoutY="37.0" prefHeight="354.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <HBox prefHeight="65.0" prefWidth="600.0">
+               <children>
+                  <Pane prefHeight="65.0" prefWidth="300.0" styleClass="pane-selected">
+                     <children>
+                        <Label layoutX="60.0" layoutY="7.0" prefHeight="50.0" prefWidth="161.0" styleClass="label-titulo" text="Elementos" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="65.0" prefWidth="300.0" styleClass="pane-selected">
+                     <children>
+                        <Label layoutX="70.0" layoutY="8.0" prefHeight="50.0" prefWidth="161.0" styleClass="label-titulo" text="Estados" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <VBox layoutX="-1.0" layoutY="64.0" prefHeight="290.0" prefWidth="300.0">
+               <children>
+                  <HBox prefHeight="55.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Fuego" layoutX="61.0" layoutY="19.0" styleClass="label-titulo" text="Fuego" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoF" layoutX="6.0" layoutY="2.0" prefHeight="50.0" prefWidth="142.0" text="infoF" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="54.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Agua" layoutX="61.0" layoutY="19.0" styleClass="label-titulo" text="Agua" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoA" layoutX="8.0" layoutY="2.0" prefHeight="50.0" prefWidth="142.0" text="infoA" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="61.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Rayo" layoutX="61.0" layoutY="22.0" styleClass="label-titulo" text="Rayo" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoR" layoutX="8.0" layoutY="6.0" prefHeight="50.0" prefWidth="142.0" text="infoR" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="60.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Hielo" layoutX="61.0" layoutY="22.0" styleClass="label-titulo" text="Hielo" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoH" layoutX="8.0" layoutY="5.0" prefHeight="50.0" prefWidth="142.0" text="infoH" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="60.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Draco" layoutX="61.0" layoutY="22.0" styleClass="label-titulo" text="Draco" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoD" layoutX="8.0" layoutY="5.0" prefHeight="50.0" prefWidth="142.0" text="infoD" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutX="299.0" layoutY="64.0" prefHeight="299.0" prefWidth="300.0">
+               <children>
+                  <HBox prefHeight="55.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Veneno" layoutX="54.0" layoutY="19.0" styleClass="label-titulo" text="Veneno" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoV" layoutX="8.0" layoutY="3.0" prefHeight="50.0" prefWidth="142.0" text="infoV" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="54.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Sueño" layoutX="57.0" layoutY="19.0" styleClass="label-titulo" text="Sueño" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoS" layoutX="8.0" layoutY="2.0" prefHeight="50.0" prefWidth="142.0" text="infoS" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="61.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Paralisis" layoutX="52.0" layoutY="22.0" styleClass="label-titulo" text="Paralisis" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoP" layoutX="8.0" layoutY="6.0" prefHeight="50.0" prefWidth="142.0" text="infoP" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="60.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Nitro" layoutX="61.0" layoutY="22.0" styleClass="label-titulo" text="Nitro" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoN" layoutX="8.0" layoutY="5.0" prefHeight="50.0" prefWidth="142.0" text="infoN" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="60.0" prefWidth="300.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="150.0" styleClass="pane-selected">
+                           <children>
+                              <Label fx:id="Aturdimiento" layoutX="37.0" layoutY="22.0" styleClass="label-titulo" text="Aturdimiento" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Label fx:id="infoAT" layoutX="8.0" layoutY="5.0" prefHeight="50.0" prefWidth="142.0" text="infoAT" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
