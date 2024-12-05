@@ -1,6 +1,7 @@
 package com.github.Hanselmito.View;
 
 import com.github.Hanselmito.App;
+import com.github.Hanselmito.DAO.ArmasDAO;
 import com.github.Hanselmito.DAO.MonstruosDAO;
 import com.github.Hanselmito.Entity.Armas;
 import javafx.fxml.FXML;
@@ -43,6 +44,7 @@ public class ArmasMonstruo extends Controller implements Initializable {
     }
 
     // Inicializar las pestañas con la información de las armas del monstruo
+    // ArmasMonstruo.java
     private void initializeTabs() {
         List<Armas> armasList = monstruosDAO.findArmasByMonstruoName(monsterName);
         for (Armas arma : armasList) {
@@ -59,7 +61,30 @@ public class ArmasMonstruo extends Controller implements Initializable {
             Label nameLabel = new Label("Nombre: " + arma.getNombre());
             nameLabel.getStyleClass().add("label");
 
-            vBox.getChildren().addAll(imageView, nameLabel);
+            List<Armas> armasDetails = new ArmasDAO().findAllWithoutNameAndImage(arma.getNombre());
+            if (!armasDetails.isEmpty()) {
+                Armas details = armasDetails.get(0);
+                Label ataqueLabel = new Label("Ataque: " + details.getAtaque());
+                Label atributoLabel = new Label("Atributo: " + details.getAtributo());
+                Label afiladoLabel = new Label("Afilado: " + details.getAfilado());
+                Label afinidadLabel = new Label("Afinidad: " + details.getAfinidad());
+                Label defensaLabel = new Label("Defensa: " + details.getDefensa());
+                Label ranurasLabel = new Label("Ranuras: " + details.getRanuras());
+                Label materialesLabel = new Label("Materiales: " + details.getMateriales());
+
+                ataqueLabel.getStyleClass().add("label");
+                atributoLabel.getStyleClass().add("label");
+                afiladoLabel.getStyleClass().add("label");
+                afinidadLabel.getStyleClass().add("label");
+                defensaLabel.getStyleClass().add("label");
+                ranurasLabel.getStyleClass().add("label");
+                materialesLabel.getStyleClass().add("label");
+
+                vBox.getChildren().addAll(imageView, nameLabel, ataqueLabel, atributoLabel, afiladoLabel, afinidadLabel, defensaLabel, ranurasLabel, materialesLabel);
+            } else {
+                vBox.getChildren().addAll(imageView, nameLabel);
+            }
+
             anchorPane.getChildren().add(vBox);
             tab.setContent(anchorPane);
             tabPane.getTabs().add(tab);

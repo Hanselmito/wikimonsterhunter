@@ -28,11 +28,10 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         App.stage = stage;
         View view = AppController.loadFXML(Scenes.ROOT);
-        scene = new Scene(view.scene,  615, 500);
+        scene = new Scene(view.scene);
         currentController = (AppController) view.controller;
         currentController.onOpen(null);
         stage.setScene(scene);
-        stage.setMinWidth(615);
 
         // Establecer el icono de la aplicación
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/Icons/Site-Icono.jpg")));

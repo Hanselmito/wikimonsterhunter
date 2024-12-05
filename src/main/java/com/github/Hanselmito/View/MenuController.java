@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -106,7 +107,10 @@ public class MenuController extends Controller implements Initializable {
 
     @Override
     public void onOpen(Object input) throws Exception {
-
+        Stage stage = App.getStage();
+        stage.setWidth(615);
+        stage.setHeight(437);
+        stage.setMinWidth(615);
     }
 
     @Override
