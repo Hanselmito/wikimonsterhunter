@@ -20,6 +20,7 @@ public class ArmasDAO implements DAO<Armas> {
     private final static String FINDALL = "SELECT * FROM armas";
     private final static String FINDBYID = "SELECT * FROM armas WHERE id=?";
     private final static String FINDALLNAME = "SELECT nombre FROM armas";
+    private final static String FINDALLWITHOUTNAMEANDIMAGE = "SELECT ataque, atributo, afilado, afinidad, defensa, ranuras, materiales FROM armas where nombre=?";
 
     private Connection conn;
 
@@ -153,6 +154,29 @@ public class ArmasDAO implements DAO<Armas> {
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 result.add(res.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    // ArmasDAO.java
+    public List<Armas> findAllWithoutNameAndImage(String nombre) {
+        List<Armas> result = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FINDALLWITHOUTNAMEANDIMAGE)) {
+            pst.setString(1, nombre);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                Armas a = new Armas();
+                a.setAtaque(res.getInt("ataque"));
+                a.setAtributo(Atributo.valueOf(res.getString("atributo")));
+                a.setAfilado(res.getString("afilado"));
+                a.setAfinidad(res.getString("afinidad"));
+                a.setDefensa(res.getInt("defensa"));
+                a.setRanuras(res.getInt("ranuras"));
+                a.setMateriales(res.getString("materiales"));
+                result.add(a);
             }
         } catch (SQLException e) {
             e.printStackTrace();

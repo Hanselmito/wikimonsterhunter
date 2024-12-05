@@ -7,7 +7,7 @@
 
 <!-- src/main/resources/com/github/Hanselmito/View/Bestiario.fxml -->
 
-<AnchorPane stylesheets="@../../../../Styles/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.Bestiario">
+<AnchorPane prefHeight="949.0" prefWidth="600.0" stylesheets="@../../../../Styles/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Hanselmito.View.Bestiario">
   <TabPane fx:id="tabPane" layoutX="10" layoutY="10" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <tabs>
       <Tab fx:id="tab1" text="Dragon_Anciano">

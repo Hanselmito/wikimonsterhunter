@@ -1,17 +1,19 @@
-/* styles.css */
+/* src/main/resources/Styles/ArmasStyles.css */
 .tab-pane {
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: #ffffff; /* Cambiar el fondo a blanco */
 }
 
 .tab {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-text-fill: #000000; /* Cambiar el color del texto a negro */
 }
 
 .vbox {
     -fx-padding: 20px;
     -fx-spacing: 10px;
     -fx-alignment: center;
+    -fx-background-color: #ffffff; /* Cambiar el fondo a blanco */
 }
 
 .armas-vbox {
@@ -19,7 +21,7 @@
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
     -fx-padding: 10px;
-    -fx-background-color: #fff;
+    -fx-background-color: #ffffff; /* Cambiar el fondo a blanco */
 }
 
 .image-view {
@@ -29,12 +31,12 @@
 
 .label {
     -fx-font-size: 12px;
-    -fx-text-fill: #333;
+    -fx-text-fill: #000000; /* Cambiar el color del texto a negro */
 }
 
 .button {
     -fx-background-color: #007bff;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #ffffff;
     -fx-padding: 10px 20px;
     -fx-border-radius: 5px;
 }
